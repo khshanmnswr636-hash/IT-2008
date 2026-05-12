@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <!-- ================= BASIC META ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الدعم الفني - IT Management Business</title>
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="/images/IT.png">
+    <link rel="apple-touch-icon" href="/images/IT.png">
+
+    <!-- ================= OPEN GRAPH ================= -->
+    <meta property="og:image" content="https://linkversa.sbs/images/IT.png">
+    <meta name="twitter:image" content="https://linkversa.sbs/images/IT.png">
+
+    <!-- ================= FONTS ================= -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- ================= FONT AWESOME ================= -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    <style>
+        /* ============================================ */
+        /* RESET & BASE STYLES */
+        /* ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: #0f172a;
+        }
+
+        /* Dark Theme */
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+        }
+
+        body.dark .card,
+        body.dark .ticket-form,
+        body.dark .tickets-list,
+        body.dark .faq-item {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        body.dark .form-group input,
+        body.dark .form-group select,
+        body.dark .form-group textarea {
+            background: #0f172a;
+            border-color: #334155;
+            color: #f1f5f9;
+        }
+
+        body.dark footer {
+            background: #020617;
+        }
+
+        /* ============================================ */
+        /* NAVIGATION BAR */
+        /* ============================================ */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        body.dark nav {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .nav-links a {
+            color: #cbd5e1;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #0284c7;
+            color: white;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .icon-btn {
+            background: #334155;
+            color: white;
+        }
+
+        .icon-btn:hover {
+            background: #0284c7;
+            color: white;
+        }
+
+        .auth-link {
+            text-decoration: none;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        /* ============================================ */
+        /* PAGE HEADER */
+        /* ============================================ */
+        .page-header {
+            text-align: center;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+
+        body.dark .page-header p {
+            color: #94a3b8;
+        }
+
+        /* ============================================ */
+        /* CONTACT CARDS */
+        /* ============================================ */
+        .contact-section {
+            padding: 2rem 5%;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        body.dark .contact-card {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .contact-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .contact-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #0284c7;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-card a {
+            color: #0f172a;
+            text-decoration: none;
+        }
+
+        body.dark .contact-card a {
+            color: #f1f5f9;
+        }
+
+        .contact-card a:hover {
+            color: #0284c7;
+        }
+
+        .contact-note {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .copy-btn {
+            background: #334155;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: #0284c7;
+            color: white;
+        }
+
+        /* ============================================ */
+        /* SUPPORT TEAM */
+        /* ============================================ */
+        .team-section {
+            padding: 3rem 5%;
+            background: #e0f2fe;
+        }
+
+        body.dark .team-section {
+            background: #0f172a;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 4px;
+            background: #0284c7;
+            border-radius: 2px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .team-card {
+            background: #1e293b;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto 1rem;
+        }
+
+        .team-avatar i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .team-info {
+            padding: 0 1.5rem 1.5rem;
+        }
+
+        .team-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            color: #0284c7;
+        }
+
+        .team-role {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-desc {
+            color: #64748b;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        body.dark .team-desc {
+            color: #94a3b8;
+        }
+
+        .team-status {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.75rem;
+        }
+
+        /* ============================================ */
+        /* TICKET SYSTEM */
+        /* ============================================ */
+        .ticket-section {
+            padding: 3rem 5%;
+        }
+
+        .ticket-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .ticket-form,
+        .tickets-list {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+        }
+
+        body.dark .ticket-form,
+        body.dark .tickets-list {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .ticket-form h3,
+        .tickets-list h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #0284c7;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #334155;
+        }
+
+        body.dark .form-group label {
+            color: #cbd5e1;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.8rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        .ticket-item {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-right: 4px solid #0284c7;
+        }
+
+        body.dark .ticket-item {
+            background: #0f172a;
+        }
+
+        .ticket-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .ticket-title {
+            font-weight: 700;
+        }
+
+        .ticket-status {
+            padding: 0.2rem 0.8rem;
+            border-radius: 2rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #fbbf24;
+            color: #000;
+        }
+
+        .status-processing {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .status-resolved {
+            background: #10b981;
+            color: white;
+        }
+
+        .ticket-date {
+            font-size: 0.7rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .ticket-message {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        body.dark .ticket-message {
+            color: #94a3b8;
+        }
+
+        .empty-tickets {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+        }
+
+        /* ============================================ */
+        /* FAQ SECTION */
+        /* ============================================ */
+        .faq-section {
+            padding: 3rem 5%;
+            background: #e0f2fe;
+        }
+
+        body.dark .faq-section {
+            background: #0f172a;
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 1rem;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        body.dark .faq-item {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .faq-question {
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: #f1f5f9;
+        }
+
+        body.dark .faq-question:hover {
+            background: #334155;
+        }
+
+        .faq-question h4 {
+            font-size: 1rem;
+        }
+
+        .faq-question i {
+            color: #0284c7;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.2rem;
+            max-height: 200px;
+        }
+
+        .faq-answer p {
+            color: #64748b;
+            line-height: 1.8;
+        }
+
+        body.dark .faq-answer p {
+            color: #94a3b8;
+        }
+
+        /* ============================================ */
+        /* CHAT BUTTON */
+        /* ============================================ */
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 999;
+        }
+
+        .chat-btn {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .chat-btn i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .chat-btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* ============================================ */
+        /* FOOTER */
+        /* ============================================ */
+        footer {
+            background: #0f172a;
+            padding: 3rem 5% 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-section a:hover {
+            color: #0284c7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #0284c7;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+        }
+
+        /* ============================================ */
+        /* BACK TO TOP */
+        /* ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #0284c7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: #0369a1;
+        }
+
+        .back-to-top i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* ============================================ */
+        /* TOAST */
+        /* ============================================ */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            z-index: 1000;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE */
+        /* ============================================ */
+        @media (max-width: 900px) {
+            .ticket-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-chalkboard-user"></i>
+            </div>
+            <div class="logo-text">IT Management Business</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-user"></i> ملفي الشخصي</a></li>
+            <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> الدورات</a></li>
+            <li><a href="about.html"><i class="fas fa-building"></i> من نحن</a></li>
+            <li><a href="support.html"><i class="fas fa-headset"></i> الدعم الفني</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> التواصل</a></li>
+            <li><a href="comments.html"><i class="fas fa-envelope"></i> التعليقات</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+            <div id="authStatus">
+                <a href="auth.html" id="loginBtn" class="auth-link"><i class="fas fa-user"></i> دخول</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1><i class="fas fa-headset"></i> الدعم الفني</h1>
+        <p>نحن هنا لمساعدتك على مدار الساعة</p>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="contact-section">
+        <div class="contact-grid">
+            <!-- Phone Card -->
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>اتصل بنا</h3>
+                <div class="contact-value">
+                    <a href="tel:+962796198093">0796198093</a>
+                </div>
+                <div class="contact-note">متاح من الأحد إلى الخميس 9ص - 6م</div>
+                <button class="copy-btn" onclick="copyText('0796198093')">
+                    <i class="fas fa-copy"></i> نسخ الرقم
+                </button>
+            </div>
+
+            <!-- Email Card -->
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>البريد الإلكتروني</h3>
+                <div class="contact-value">
+                    <a href="mailto:khshanmnswr636@gmail.com">khshanmnswr636@gmail.com</a>
+                </div>
+                <div class="contact-note">نرد على جميع الاستفسارات خلال 24 ساعة</div>
+                <button class="copy-btn" onclick="copyText('khshanmnswr636@gmail.com')">
+                    <i class="fas fa-copy"></i> نسخ البريد
+                </button>
+            </div>
+
+            <!-- Instagram Card -->
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3>إنستغرام</h3>
+                <div class="contact-value">
+                    <a href="https://www.instagram.com/mhnd___90/" target="_blank">@mhnd___90</a>
+                </div>
+                <div class="contact-note">تابعنا للحصول على آخر التحديثات</div>
+                <button class="copy-btn" onclick="window.open('https://www.instagram.com/mhnd___90/', '_blank')">
+                    <i class="fab fa-instagram"></i> زيارة الصفحة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Support Team Section -->
+    <div class="team-section">
+        <h2 class="section-title">فريق الدعم الفني</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="team-info">
+                    <h3>محمد الخشانمن</h3>
+                    <div class="team-role">مدير الدعم الفني</div>
+                    <p class="team-desc">مختص في حل المشاكل التقنية المعقدة وإدارة فرق الدعم.</p>
+                    <span class="team-status"><i class="fas fa-circle"></i> متاح الآن</span>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="team-info">
+                    <h3>أحمد الشامي</h3>
+                    <div class="team-role">خبير تقني</div>
+                    <p class="team-desc">متخصص في حل مشاكل الدعم الفني للدورات والمنصة.</p>
+                    <span class="team-status"><i class="fas fa-circle"></i> متاح الآن</span>
+                </div>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="team-info">
+                    <h3>سارة يوسف</h3>
+                    <div class="team-role">خدمة العملاء</div>
+                    <p class="team-desc">الرد على الاستفسارات وحل المشاكل اليومية للطلاب.</p>
+                    <span class="team-status"><i class="fas fa-circle"></i> متاحة الآن</span>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticket System Section -->
+    <div class="ticket-section">
+        <div class="ticket-container">
+            <!-- Ticket Form -->
+            <div class="ticket-form">
+                <h3><i class="fas fa-ticket-alt"></i> إرسال تذكرة دعم</h3>
+                <form id="ticketForm">
+                    <div class="form-group">
+                        <label>الاسم الكامل</label>
+                        <input type="text" id="ticketName" placeholder="أدخل اسمك" required>
+                    </div>
+                    <div class="form-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="ticketEmail" placeholder="example@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>نوع المشكلة</label>
+                        <select id="ticketCategory">
+                            <option value="technical">مشكلة تقنية</option>
+                            <option value="account">مشكلة في الحساب</option>
+                            <option value="course">مشكلة في الدورة</option>
+                            <option value="payment">مشكلة في الدفع</option>
+                            <option value="other">استفسار عام</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>عنوان المشكلة</label>
+                        <input type="text" id="ticketTitle" placeholder="ملخص المشكلة" required>
+                    </div>
+                    <div class="form-group">
+                        <label>تفاصيل المشكلة</label>
+                        <textarea id="ticketMessage" placeholder="اكتب تفاصيل مشكلتك بالتفصيل..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> إرسال التذكرة
+                    </button>
+                </form>
+            </div>
+
+            <!-- Tickets List -->
+            <div class="tickets-list">
+                <h3><i class="fas fa-list"></i> تذاكري</h3>
+                <div id="ticketsList">
+                    <div class="empty-tickets">
+                        <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.5;"></i>
+                        <p>لا توجد تذاكر حالياً</p>
+                        <p style="font-size: 0.85rem;">قم بإرسال تذكرة جديدة وسنقوم بالرد عليك</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+        <h2 class="section-title">الأسئلة الشائعة</h2>
+        <div class="faq-grid">
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>كيف يمكنني التسجيل في المنصة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>يمكنك التسجيل بسهولة من خلال الضغط على زر "دخول" في أعلى الصفحة، ثم اختيار "إنشاء حساب جديد". ستحتاج إلى إدخال اسمك وبريدك الإلكتروني وكلمة مرور.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>ماذا أفعل إذا واجهت مشكلة في مشاهدة الفيديوهات؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>تأكد من اتصالك بالإنترنت، جرب تحديث الصفحة أو استخدام متصفح آخر. إذا استمرت المشكلة، تواصل معنا عبر نموذج التذاكر.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>كيف أحصل على الشهادة بعد إتمام الدورة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>بعد إتمام الدورة بنجاح واجتياز الاختبار بنسبة 70%، ستظهر لك شهادة يمكنك تحميلها وطباعتها مباشرة من صفحة الدورة.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>هل الشهادات معتمدة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>الشهادات المقدمة من المنصة هي شهادات إتمام غير معتمدة رسمياً، ولكنها تعكس اجتيازك للدورة وتعتبر إضافة قوية لسيرتك الذاتية.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    <h4>كم تستغرق مدة الرد على التذكرة؟</h4>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    <p>نحن نحرص على الرد على جميع التذاكر خلال 24 ساعة كحد أقصى. في أيام العمل، قد يكون الرد أسرع.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Button -->
+    <div class="chat-button">
+        <button class="chat-btn" id="chatBtn">
+            <i class="fas fa-comment-dots"></i>
+        </button>
+    </div>
+
+    <!-- Back to Top -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>IT Management Business</h3>
+                <p>منصة تعليمية متخصصة في مجالات إدارة الأعمال وتكنولوجيا المعلومات.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/mhnd___90/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <p><a href="index.html">الرئيسية</a></p>
+                <p><a href="courses.html">الدورات</a></p>
+                <p><a href="about.html">من نحن</a></p>
+                <p><a href="contact.html">التواصل</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>معلومات الاتصال</h3>
+                <p><i class="fas fa-phone"></i> <a href="tel:+962796198093">0796198093</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:khshanmnswr636@gmail.com">khshanmnswr636@gmail.com</a></p>
+                <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/mhnd___90/" target="_blank">@mhnd___90</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 IT Management Business - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // ============================================
+        // THEME TOGGLE
+        // ============================================
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                const themeBtn = document.getElementById('themeToggle');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            const themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        initTheme();
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // ============================================
+        // COPY FUNCTION
+        // ============================================
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم النسخ بنجاح!');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = '<i class="fas fa-check-circle"></i> ' + message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // ============================================
+        // TICKET SYSTEM
+        // ============================================
+        let tickets = JSON.parse(localStorage.getItem('supportTickets')) || [];
+
+        function renderTickets() {
+            const container = document.getElementById('ticketsList');
+            if (!container) return;
+
+            if (tickets.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-tickets">
+                        <i class="fas fa-inbox" style="font-size: 3rem; opacity: 0.5;"></i>
+                        <p>لا توجد تذاكر حالياً</p>
+                        <p style="font-size: 0.85rem;">قم بإرسال تذكرة جديدة وسنقوم بالرد عليك</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = tickets.map(ticket => {
+                let statusClass = '';
+                let statusText = '';
+                switch (ticket.status) {
+                    case 'pending': statusClass = 'status-pending'; statusText = 'قيد الانتظار'; break;
+                    case 'processing': statusClass = 'status-processing'; statusText = 'قيد المعالجة'; break;
+                    case 'resolved': statusClass = 'status-resolved'; statusText = 'تم الحل'; break;
+                    default: statusClass = 'status-pending'; statusText = 'قيد الانتظار';
+                }
+
+                let categoryText = '';
+                switch (ticket.category) {
+                    case 'technical': categoryText = 'مشكلة تقنية'; break;
+                    case 'account': categoryText = 'مشكلة في الحساب'; break;
+                    case 'course': categoryText = 'مشكلة في الدورة'; break;
+                    case 'payment': categoryText = 'مشكلة في الدفع'; break;
+                    default: categoryText = 'استفسار عام';
+                }
+
+                return `
+                    <div class="ticket-item">
+                        <div class="ticket-header">
+                            <span class="ticket-title">${escapeHtml(ticket.title)}</span>
+                            <span class="ticket-status ${statusClass}">${statusText}</span>
+                        </div>
+                        <div class="ticket-date">
+                            <i class="fas fa-calendar-alt"></i> ${ticket.date} | 
+                            <i class="fas fa-tag"></i> ${categoryText}
+                        </div>
+                        <div class="ticket-message">${escapeHtml(ticket.message.substring(0, 100))}${ticket.message.length > 100 ? '...' : ''}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        const ticketForm = document.getElementById('ticketForm');
+        if (ticketForm) {
+            ticketForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('ticketName').value;
+                const email = document.getElementById('ticketEmail').value;
+                const category = document.getElementById('ticketCategory').value;
+                const title = document.getElementById('ticketTitle').value;
+                const message = document.getElementById('ticketMessage').value;
+                
+                if (!name || !email || !title || !message) {
+                    showToast('الرجاء ملء جميع الحقول');
+                    return;
+                }
+                
+                const newTicket = {
+                    id: Date.now(),
+                    name,
+                    email,
+                    category,
+                    title,
+                    message,
+                    status: 'pending',
+                    date: new Date().toLocaleString('ar-EG')
+                };
+                
+                tickets.unshift(newTicket);
+                localStorage.setItem('supportTickets', JSON.stringify(tickets));
+                renderTickets();
+                ticketForm.reset();
+                showToast('تم إرسال التذكرة بنجاح!');
+            });
+        }
+
+        renderTickets();
+
+        // ============================================
+        // FAQ TOGGLE
+        // ============================================
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // ============================================
+        // BACK TO TOP
+        // ============================================
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ============================================
+        // CHAT BUTTON
+        // ============================================
+        const chatBtn = document.getElementById('chatBtn');
+        chatBtn.addEventListener('click', () => {
+            showToast('مرحباً! يمكنك التواصل معنا على الرقم 0796198093');
+        });
+
+        // ============================================
+        // USER AUTH STATUS
+        // ============================================
+        function updateAuthUI() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const authStatus = document.getElementById('authStatus');
+            if (authStatus) {
+                if (currentUser) {
+                    authStatus.innerHTML = `
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <span style="background: #0284c7; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; font-size: 0.9rem;">
+                                <i class="fas fa-user-circle"></i> ${currentUser.name}
+                            </span>
+                            <button id="logoutBtn" style="background: #ef4444; border: none; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; cursor: pointer;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                    const logoutBtn = document.getElementById('logoutBtn');
+                    if (logoutBtn) {
+                        logoutBtn.addEventListener('click', () => {
+                            localStorage.removeItem('currentUser');
+                            window.location.reload();
+                        });
+                    }
+                }
+            }
+        }
+        updateAuthUI();
+    </script>
+</body>
+</html>

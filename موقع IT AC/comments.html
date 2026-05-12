@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="/images/IT.png">
+    <link rel="apple-touch-icon" href="/images/IT.png">
+
+    <!-- ================= OPEN GRAPH ================= -->
+    <meta property="og:image" content="https://linkversa.sbs/images/IT.png">
+    <meta name="twitter:image" content="https://linkversa.sbs/images/IT.png">
+
+    <!-- ================= META BASIC ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="description" content="نظام التعليقات - IT Management Business Academy">
+    <meta name="keywords" content="تعليقات, نقاش, مناقشات, IT Management">
+    <meta name="author" content="IT Management Business Academy">
+    <meta name="theme-color" content="#0284c7">
+    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <title>التعليقات | IT Management Business Academy</title>
+
+    <!-- ================= GOOGLE FONTS ================= -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- ================= FONT AWESOME ================= -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ================= AOS ANIMATION ================= -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, collection, addDoc, query, orderBy, onSnapshot, doc, updateDoc, arrayUnion, arrayRemove, getDoc, setDoc, deleteDoc, where, getDocs, limit, startAfter } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAq9SyITCz-fLHyCNLX4jy1nKO8sn3mfSo",
+            authDomain: "safe-vault-aeb34.firebaseapp.com",
+            projectId: "safe-vault-aeb34",
+            storageBucket: "safe-vault-aeb34.firebasestorage.app",
+            messagingSenderId: "923643379266",
+            appId: "1:923643379266:web:745defd283e1d8db7ab7db",
+            measurementId: "G-GTYEWDYD2J"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        window.auth = auth;
+        window.db = db;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.signInAnonymously = signInAnonymously;
+        window.collection = collection;
+        window.addDoc = addDoc;
+        window.query = query;
+        window.orderBy = orderBy;
+        window.onSnapshot = onSnapshot;
+        window.doc = doc;
+        window.updateDoc = updateDoc;
+        window.arrayUnion = arrayUnion;
+        window.arrayRemove = arrayRemove;
+        window.getDoc = getDoc;
+        window.setDoc = setDoc;
+        window.where = where;
+        window.getDocs = getDocs;
+        window.limit = limit;
+        window.startAfter = startAfter;
+        
+        console.log("Firebase initialized for comments system");
+    </script>
+    
+    <style>
+        /* ============================================ */
+        /* ROOT VARIABLES */
+        /* ============================================ */
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.4);
+            --secondary: #0f172a;
+            --secondary-light: #1e293b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #fbbf24;
+            
+            --glass-bg: rgba(30, 41, 59, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-light: rgba(255, 255, 255, 0.05);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-glow: 0 0 30px var(--primary-glow);
+            
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            
+            --border-radius-sm: 0.5rem;
+            --border-radius-md: 1rem;
+            --border-radius-lg: 1.5rem;
+            --border-radius-xl: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Light Mode */
+        body.light-mode {
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: floatOrb 25s infinite alternate ease-in-out;
+        }
+
+        .bg-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            top: -200px;
+            right: -200px;
+            opacity: 0.3;
+        }
+
+        .bg-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-light), transparent);
+            bottom: -150px;
+            left: -150px;
+            opacity: 0.2;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, -50px) scale(1.3); }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.3rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius-xl);
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-light);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1rem;
+            border-radius: var(--border-radius-xl);
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all var(--transition-normal);
+        }
+
+        .icon-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 7rem 1.5rem 3rem;
+        }
+
+        /* Comments Header */
+        .comments-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .comments-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .comments-title i {
+            color: var(--primary-light);
+        }
+
+        .comments-count {
+            background: var(--glass-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: var(--border-radius-xl);
+            font-size: 0.9rem;
+        }
+
+        /* Comment Form */
+        .comment-form-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .comment-form-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .comment-avatar {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .comment-avatar i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .comment-input-wrapper {
+            flex: 1;
+        }
+
+        .comment-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+            transition: all var(--transition-fast);
+        }
+
+        .comment-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .comment-form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .emoji-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-xl);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .emoji-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: var(--border-radius-xl);
+            padding: 0.5rem 1.5rem;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Comments List */
+        .comments-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Comment Card */
+        .comment-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            transition: all var(--transition-normal);
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .comment-card:hover {
+            border-color: var(--primary);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .comment-user {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .user-avatar i {
+            font-size: 1.3rem;
+            color: white;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .verified-badge {
+            background: var(--success);
+            border-radius: var(--border-radius-xl);
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .comment-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .comment-menu {
+            position: relative;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.3rem;
+            border-radius: 50%;
+            transition: all var(--transition-fast);
+        }
+
+        .menu-btn:hover {
+            background: var(--glass-bg);
+            color: var(--primary-light);
+        }
+
+        .menu-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--secondary-light);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            padding: 0.5rem;
+            display: none;
+            z-index: 10;
+            min-width: 120px;
+        }
+
+        .menu-dropdown.show {
+            display: block;
+        }
+
+        .menu-dropdown button {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            text-align: right;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: var(--border-radius-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .menu-dropdown button:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .comment-content {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+            word-break: break-word;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            border-radius: var(--border-radius-xl);
+            transition: all var(--transition-fast);
+            font-size: 0.85rem;
+        }
+
+        .action-btn:hover {
+            background: var(--glass-bg);
+            color: var(--primary-light);
+        }
+
+        .action-btn.liked {
+            color: var(--danger);
+        }
+
+        .reply-count {
+            color: var(--primary-light);
+            font-size: 0.8rem;
+        }
+
+        /* Replies Section */
+        .replies-section {
+            margin-top: 1.5rem;
+            padding-right: 2rem;
+            border-right: 2px solid var(--glass-border);
+        }
+
+        .toggle-replies-btn {
+            background: none;
+            border: none;
+            color: var(--primary-light);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+        }
+
+        .replies-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .reply-card {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--border-radius-md);
+            padding: 1rem;
+        }
+
+        .reply-form {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .reply-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 0.8rem;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+
+        .reply-submit {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: var(--border-radius-xl);
+            padding: 0.5rem 1rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Loading Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, var(--glass-bg) 25%, var(--glass-border) 50%, var(--glass-bg) 75%);
+            background-size: 200% 100%;
+            animation: skeletonLoad 1.5s infinite;
+            border-radius: var(--border-radius-md);
+        }
+
+        @keyframes skeletonLoad {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .skeleton-comment {
+            padding: 1.5rem;
+        }
+
+        .skeleton-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+        }
+
+        .skeleton-line {
+            height: 12px;
+            margin: 0.5rem 0;
+            border-radius: 6px;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-xl);
+            color: white;
+            z-index: 2000;
+            animation: toastFade 0.3s ease;
+        }
+
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+
+        @keyframes toastFade {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 6rem 1rem 2rem;
+            }
+            
+            .replies-section {
+                padding-right: 1rem;
+            }
+            
+            .comment-header {
+                flex-wrap: wrap;
+            }
+            
+            .comment-user {
+                width: 100%;
+            }
+            
+            .reply-form {
+                flex-wrap: wrap;
+            }
+            
+            .reply-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg">
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-chalkboard-user"></i></div>
+            <div class="logo-text">IT MBA</div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-user"></i> ملفي الشخصي</a></li>
+            <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> الدورات</a></li>
+            <li><a href="about.html"><i class="fas fa-building"></i> من نحن</a></li>
+            <li><a href="support.html"><i class="fas fa-headset"></i> الدعم الفني</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> التواصل</a></li>
+            <li><a href="comments.html"><i class="fas fa-envelope"></i> التعليقات</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+            <div id="authStatus">
+                <a href="auth.html" id="loginBtn" class="icon-btn"><i class="fas fa-user"></i> دخول</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="comments-header">
+            <div class="comments-title">
+                <i class="fas fa-comments"></i>
+                <span>التعليقات</span>
+            </div>
+            <div class="comments-count" id="commentsCount">0 تعليق</div>
+        </div>
+
+        <!-- Comment Form -->
+        <div class="comment-form-container" id="commentFormContainer">
+            <div class="comment-form-header">
+                <div class="comment-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="comment-input-wrapper">
+                    <textarea class="comment-input" id="commentInput" placeholder="اكتب تعليقك..." rows="2"></textarea>
+                </div>
+            </div>
+            <div class="comment-form-actions">
+                <button class="emoji-btn" id="emojiBtn"><i class="fas fa-smile"></i> إيموجي</button>
+                <button class="submit-btn" id="submitCommentBtn">نشر التعليق</button>
+            </div>
+        </div>
+
+        <!-- Comments List -->
+        <div class="comments-list" id="commentsList">
+            <div class="skeleton-comment">
+                <div class="skeleton skeleton-avatar" style="width: 44px; height: 44px; border-radius: 50%; margin-bottom: 1rem;"></div>
+                <div class="skeleton skeleton-line" style="width: 60%;"></div>
+                <div class="skeleton skeleton-line" style="width: 90%;"></div>
+                <div class="skeleton skeleton-line" style="width: 80%;"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script type="module">
+        // ============================================
+        // INITIALIZATION
+        // ============================================
+        let currentUser = null;
+        let comments = [];
+        let repliesCache = {};
+        let lastVisible = null;
+        let loading = false;
+        let hasMore = true;
+
+        // DOM Elements
+        const commentsList = document.getElementById('commentsList');
+        const commentsCountSpan = document.getElementById('commentsCount');
+        const commentInput = document.getElementById('commentInput');
+        const submitBtn = document.getElementById('submitCommentBtn');
+        const emojiBtn = document.getElementById('emojiBtn');
+
+        // ============================================
+        // HELPER FUNCTIONS
+        // ============================================
+        function formatTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'الآن';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `منذ ${minutes} دقيقة`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `منذ ${hours} ساعة`;
+            const days = Math.floor(hours / 24);
+            if (days < 30) return `منذ ${days} يوم`;
+            const months = Math.floor(days / 30);
+            if (months < 12) return `منذ ${months} شهر`;
+            return `منذ ${Math.floor(months / 12)} سنة`;
+        }
+
+        function getFullDate(date) {
+            return date.toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        function sanitizeInput(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        function updateCommentsCount() {
+            const count = comments.length;
+            commentsCountSpan.innerText = `${count} ${count === 1 ? 'تعليق' : 'تعليقات'}`;
+        }
+
+        // ============================================
+        // RENDER FUNCTIONS
+        // ============================================
+        function renderReplies(parentId, replies, indentLevel = 0) {
+            if (!replies || replies.length === 0) return '';
+            
+            let html = '<div class="replies-list">';
+            replies.forEach(reply => {
+                const replyDate = reply.createdAt?.toDate ? reply.createdAt.toDate() : new Date();
+                const replyLiked = currentUser && reply.likes?.includes(currentUser.uid);
+                
+                html += `
+                    <div class="reply-card" data-comment-id="${reply.id}" data-reply-id="${reply.id}">
+                        <div class="comment-header" style="margin-bottom: 0.5rem;">
+                            <div class="comment-user">
+                                <div class="user-avatar" style="width: 32px; height: 32px;">
+                                    <i class="fas fa-user" style="font-size: 1rem;"></i>
+                                </div>
+                                <div class="user-info">
+                                    <div class="user-name">
+                                        ${sanitizeInput(reply.authorName)}
+                                        ${reply.isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثق</span>' : ''}
+                                    </div>
+                                    <div class="comment-time" title="${getFullDate(replyDate)}">${formatTimeAgo(replyDate)}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-content">${sanitizeInput(reply.content)}</div>
+                        <div class="comment-actions">
+                            <button class="action-btn like-btn ${replyLiked ? 'liked' : ''}" data-id="${reply.id}" data-type="reply">
+                                <i class="fas fa-heart"></i>
+                                <span>${reply.likes?.length || 0}</span>
+                            </button>
+                            <button class="action-btn reply-to-reply-btn" data-id="${reply.id}" data-name="${sanitizeInput(reply.authorName)}">
+                                <i class="fas fa-reply"></i> رد
+                            </button>
+                        </div>
+                        <div class="reply-form-container" id="replyForm-${reply.id}" style="display: none;">
+                            <div class="reply-form">
+                                <input type="text" class="reply-input" placeholder="اكتب ردك..." id="replyInput-${reply.id}">
+                                <button class="reply-submit" data-parent-id="${parentId}" data-reply-to-id="${reply.id}">إرسال</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            return html;
+        }
+
+        function renderComments() {
+            if (!commentsList) return;
+            
+            if (comments.length === 0) {
+                commentsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-comment-slash"></i>
+                        <p>لا توجد تعليقات بعد</p>
+                        <p style="font-size: 0.85rem;">كن أول من يشارك رأيه!</p>
+                    </div>
+                `;
+                updateCommentsCount();
+                return;
+            }
+            
+            commentsList.innerHTML = comments.map(comment => {
+                const commentDate = comment.createdAt?.toDate ? comment.createdAt.toDate() : new Date();
+                const isLiked = currentUser && comment.likes?.includes(currentUser.uid);
+                const replies = repliesCache[comment.id] || [];
+                const replyCount = replies.length;
+                
+                return `
+                    <div class="comment-card" data-comment-id="${comment.id}">
+                        <div class="comment-header">
+                            <div class="comment-user">
+                                <div class="user-avatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="user-info">
+                                    <div class="user-name">
+                                        ${sanitizeInput(comment.authorName)}
+                                        ${comment.isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثق</span>' : ''}
+                                    </div>
+                                    <div class="comment-time" title="${getFullDate(commentDate)}">${formatTimeAgo(commentDate)}</div>
+                                </div>
+                            </div>
+                            <div class="comment-menu">
+                                <button class="menu-btn" data-id="${comment.id}"><i class="fas fa-ellipsis-h"></i></button>
+                                <div class="menu-dropdown" id="menu-${comment.id}">
+                                    ${currentUser && currentUser.uid === comment.authorId ? '<button class="delete-comment" data-id="${comment.id}"><i class="fas fa-trash"></i> حذف</button>' : ''}
+                                    <button class="report-comment" data-id="${comment.id}"><i class="fas fa-flag"></i> إبلاغ</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="comment-content">${sanitizeInput(comment.content)}</div>
+                        <div class="comment-actions">
+                            <button class="action-btn like-btn ${isLiked ? 'liked' : ''}" data-id="${comment.id}" data-type="comment">
+                                <i class="fas fa-heart"></i>
+                                <span>${comment.likes?.length || 0}</span>
+                            </button>
+                            <button class="action-btn reply-btn" data-id="${comment.id}" data-name="${sanitizeInput(comment.authorName)}">
+                                <i class="fas fa-reply"></i> رد
+                            </button>
+                            ${replyCount > 0 ? `<button class="action-btn toggle-replies" data-id="${comment.id}">
+                                <i class="fas fa-comment-dots"></i> عرض الردود (${replyCount})
+                            </button>` : ''}
+                        </div>
+                        <div class="reply-form-container" id="replyForm-${comment.id}" style="display: none;">
+                            <div class="reply-form">
+                                <input type="text" class="reply-input" placeholder="اكتب ردك..." id="replyInput-${comment.id}">
+                                <button class="reply-submit" data-parent-id="${comment.id}">إرسال</button>
+                            </div>
+                        </div>
+                        <div class="replies-section" id="replies-${comment.id}" style="display: none;">
+                            <div class="replies-list">
+                                ${replies.map(reply => {
+                                    const replyDate = reply.createdAt?.toDate ? reply.createdAt.toDate() : new Date();
+                                    const replyLiked = currentUser && reply.likes?.includes(currentUser.uid);
+                                    return `
+                                        <div class="reply-card" data-reply-id="${reply.id}">
+                                            <div class="comment-header" style="margin-bottom: 0.5rem;">
+                                                <div class="comment-user">
+                                                    <div class="user-avatar" style="width: 32px; height: 32px;">
+                                                        <i class="fas fa-user" style="font-size: 1rem;"></i>
+                                                    </div>
+                                                    <div class="user-info">
+                                                        <div class="user-name">
+                                                            ${sanitizeInput(reply.authorName)}
+                                                            ${reply.isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثق</span>' : ''}
+                                                        </div>
+                                                        <div class="comment-time" title="${getFullDate(replyDate)}">${formatTimeAgo(replyDate)}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="comment-content">${sanitizeInput(reply.content)}</div>
+                                            <div class="comment-actions">
+                                                <button class="action-btn like-btn ${replyLiked ? 'liked' : ''}" data-id="${reply.id}" data-type="reply">
+                                                    <i class="fas fa-heart"></i>
+                                                    <span>${reply.likes?.length || 0}</span>
+                                                </button>
+                                                <button class="action-btn reply-to-reply-btn" data-id="${reply.id}" data-name="${sanitizeInput(reply.authorName)}">
+                                                    <i class="fas fa-reply"></i> رد
+                                                </button>
+                                            </div>
+                                            <div class="reply-form-container" id="replyForm-${reply.id}" style="display: none;">
+                                                <div class="reply-form">
+                                                    <input type="text" class="reply-input" placeholder="اكتب ردك..." id="replyInput-${reply.id}">
+                                                    <button class="reply-submit" data-parent-id="${comment.id}" data-reply-to-id="${reply.id}">إرسال</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            updateCommentsCount();
+            attachEventListeners();
+        }
+
+        function attachEventListeners() {
+            // Like buttons
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.removeEventListener('click', handleLike);
+                btn.addEventListener('click', handleLike);
+            });
+            
+            // Reply buttons
+            document.querySelectorAll('.reply-btn, .reply-to-reply-btn').forEach(btn => {
+                btn.removeEventListener('click', handleReplyClick);
+                btn.addEventListener('click', handleReplyClick);
+            });
+            
+            // Toggle replies
+            document.querySelectorAll('.toggle-replies').forEach(btn => {
+                btn.removeEventListener('click', handleToggleReplies);
+                btn.addEventListener('click', handleToggleReplies);
+            });
+            
+            // Menu dropdown
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.removeEventListener('click', handleMenuClick);
+                btn.addEventListener('click', handleMenuClick);
+            });
+            
+            // Reply submit
+            document.querySelectorAll('.reply-submit').forEach(btn => {
+                btn.removeEventListener('click', handleReplySubmit);
+                btn.addEventListener('click', handleReplySubmit);
+            });
+            
+            // Delete comment
+            document.querySelectorAll('.delete-comment').forEach(btn => {
+                btn.removeEventListener('click', handleDeleteComment);
+                btn.addEventListener('click', handleDeleteComment);
+            });
+        }
+
+        // ============================================
+        // EVENT HANDLERS
+        // ============================================
+        async function handleLike(e) {
+            e.stopPropagation();
+            if (!currentUser) {
+                showToast('الرجاء تسجيل الدخول أولاً', 'error');
+                return;
+            }
+            
+            const btn = e.currentTarget;
+            const commentId = btn.dataset.id;
+            const type = btn.dataset.type;
+            
+            const commentRef = window.doc(window.db, type === 'comment' ? 'comments' : 'replies', commentId);
+            const commentDoc = await window.getDoc(commentRef);
+            
+            if (commentDoc.exists()) {
+                const data = commentDoc.data();
+                const likes = data.likes || [];
+                const isLiked = likes.includes(currentUser.uid);
+                
+                await window.updateDoc(commentRef, {
+                    likes: isLiked ? window.arrayRemove(currentUser.uid) : window.arrayUnion(currentUser.uid)
+                });
+            }
+        }
+        
+        function handleReplyClick(e) {
+            e.stopPropagation();
+            const btn = e.currentTarget;
+            const commentId = btn.dataset.id;
+            const form = document.getElementById(`replyForm-${commentId}`);
+            if (form) {
+                form.style.display = form.style.display === 'none' ? 'flex' : 'none';
+                const input = document.getElementById(`replyInput-${commentId}`);
+                if (input) input.focus();
+            }
+        }
+        
+        function handleToggleReplies(e) {
+            e.stopPropagation();
+            const btn = e.currentTarget;
+            const commentId = btn.dataset.id;
+            const repliesDiv = document.getElementById(`replies-${commentId}`);
+            if (repliesDiv) {
+                const isVisible = repliesDiv.style.display === 'block';
+                repliesDiv.style.display = isVisible ? 'none' : 'block';
+                btn.innerHTML = isVisible ? 
+                    `<i class="fas fa-comment-dots"></i> عرض الردود (${repliesDiv.querySelectorAll('.reply-card').length})` :
+                    `<i class="fas fa-comment-dots"></i> إخفاء الردود`;
+            }
+        }
+        
+        function handleMenuClick(e) {
+            e.stopPropagation();
+            const btn = e.currentTarget;
+            const commentId = btn.dataset.id;
+            const menu = document.getElementById(`menu-${commentId}`);
+            
+            document.querySelectorAll('.menu-dropdown').forEach(m => {
+                if (m.id !== `menu-${commentId}`) m.classList.remove('show');
+            });
+            menu.classList.toggle('show');
+        }
+        
+        async function handleReplySubmit(e) {
+            e.stopPropagation();
+            if (!currentUser) {
+                showToast('الرجاء تسجيل الدخول أولاً', 'error');
+                return;
+            }
+            
+            const btn = e.currentTarget;
+            const parentId = btn.dataset.parentId;
+            const replyToId = btn.dataset.replyToId;
+            const inputId = replyToId ? `replyInput-${replyToId}` : `replyInput-${parentId}`;
+            const input = document.getElementById(inputId);
+            const content = input?.value.trim();
+            
+            if (!content) {
+                showToast('الرجاء كتابة رد', 'error');
+                return;
+            }
+            
+            const replyData = {
+                commentId: parentId,
+                parentId: replyToId || parentId,
+                authorId: currentUser.uid,
+                authorName: currentUser.displayName || currentUser.email?.split('@')[0] || 'مستخدم',
+                authorEmail: currentUser.email,
+                isVerified: currentUser.email?.includes('edu') || false,
+                content: sanitizeInput(content),
+                likes: [],
+                createdAt: new Date(),
+                replyTo: replyToId || null
+            };
+            
+            await window.addDoc(window.collection(window.db, 'replies'), replyData);
+            input.value = '';
+            const form = document.getElementById(`replyForm-${parentId}`);
+            if (form) form.style.display = 'none';
+            loadReplies(parentId);
+            showToast('تم إضافة ردك بنجاح', 'success');
+        }
+        
+        async function handleDeleteComment(e) {
+            e.stopPropagation();
+            if (!currentUser) return;
+            
+            const btn = e.currentTarget;
+            const commentId = btn.dataset.id;
+            
+            if (confirm('هل أنت متأكد من حذف هذا التعليق؟')) {
+                await window.deleteDoc(window.doc(window.db, 'comments', commentId));
+                showToast('تم حذف التعليق', 'success');
+            }
+        }
+
+        // ============================================
+        // FIREBASE LOADERS
+        // ============================================
+        async function loadComments() {
+            const q = window.query(
+                window.collection(window.db, 'comments'),
+                window.orderBy('createdAt', 'desc'),
+                window.limit(20)
+            );
+            
+            window.onSnapshot(q, (snapshot) => {
+                comments = [];
+                snapshot.forEach((doc) => {
+                    comments.push({ id: doc.id, ...doc.data() });
+                });
+                renderComments();
+                comments.forEach(comment => loadReplies(comment.id));
+            });
+        }
+        
+        async function loadReplies(commentId) {
+            const q = window.query(
+                window.collection(window.db, 'replies'),
+                window.where('commentId', '==', commentId),
+                window.orderBy('createdAt', 'asc')
+            );
+            
+            window.onSnapshot(q, (snapshot) => {
+                const replies = [];
+                snapshot.forEach((doc) => {
+                    replies.push({ id: doc.id, ...doc.data() });
+                });
+                repliesCache[commentId] = replies;
+                renderComments();
+            });
+        }
+
+        // ============================================
+        // SUBMIT COMMENT
+        // ============================================
+        async function submitComment() {
+            if (!currentUser) {
+                showToast('الرجاء تسجيل الدخول أولاً', 'error');
+                return;
+            }
+            
+            const content = commentInput.value.trim();
+            if (!content) {
+                showToast('الرجاء كتابة تعليق', 'error');
+                return;
+            }
+            
+            const commentData = {
+                authorId: currentUser.uid,
+                authorName: currentUser.displayName || currentUser.email?.split('@')[0] || 'مستخدم',
+                authorEmail: currentUser.email,
+                isVerified: currentUser.email?.includes('edu') || false,
+                content: sanitizeInput(content),
+                likes: [],
+                createdAt: new Date()
+            };
+            
+            await window.addDoc(window.collection(window.db, 'comments'), commentData);
+            commentInput.value = '';
+            showToast('تم نشر تعليقك بنجاح', 'success');
+        }
+
+        // ============================================
+        // AUTH SETUP
+        // ============================================
+        async function setupAnonymousAuth() {
+            try {
+                const credential = await window.signInAnonymously(window.auth);
+                currentUser = credential.user;
+                updateAuthUI();
+                loadComments();
+            } catch (error) {
+                console.error("Anonymous auth error:", error);
+                loadComments();
+            }
+        }
+        
+        function updateAuthUI() {
+            const authStatus = document.getElementById('authStatus');
+            if (authStatus) {
+                if (currentUser) {
+                    authStatus.innerHTML = `
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <span style="background: #0284c7; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; font-size: 0.9rem;">
+                                <i class="fas fa-user-circle"></i> ${currentUser.displayName || 'مستخدم'}
+                            </span>
+                            <button id="logoutBtn" style="background: #ef4444; border: none; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; cursor: pointer;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+                        window.auth.signOut();
+                        window.location.reload();
+                    });
+                } else {
+                    authStatus.innerHTML = '<a href="auth.html" class="icon-btn"><i class="fas fa-user"></i> دخول</a>';
+                }
+            }
+        }
+        
+        window.onAuthStateChanged(window.auth, (user) => {
+            if (user) {
+                currentUser = user;
+                updateAuthUI();
+                loadComments();
+            } else {
+                setupAnonymousAuth();
+            }
+        });
+        
+        // Event Listeners
+        submitBtn.addEventListener('click', submitComment);
+        commentInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                submitComment();
+            }
+        });
+        
+        // Auto resize textarea
+        commentInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 150) + 'px';
+        });
+        
+        // Simple emoji picker
+        const emojis = ['😊', '👍', '❤️', '🔥', '🎉', '😂', '😍', '🙏', '👏', '💯'];
+        let emojiPicker = null;
+        emojiBtn.addEventListener('click', () => {
+            if (emojiPicker) {
+                emojiPicker.remove();
+                emojiPicker = null;
+                return;
+            }
+            emojiPicker = document.createElement('div');
+            emojiPicker.style.cssText = `
+                position: absolute;
+                background: var(--secondary-light);
+                border: 1px solid var(--glass-border);
+                border-radius: var(--border-radius-md);
+                padding: 0.5rem;
+                display: grid;
+                grid-template-columns: repeat(5, 1fr);
+                gap: 0.5rem;
+                z-index: 100;
+            `;
+            emojis.forEach(emoji => {
+                const btn = document.createElement('button');
+                btn.textContent = emoji;
+                btn.style.cssText = `
+                    background: none;
+                    border: none;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    padding: 0.3rem;
+                    border-radius: var(--border-radius-sm);
+                `;
+                btn.onclick = () => {
+                    commentInput.value += emoji;
+                    emojiPicker.remove();
+                    emojiPicker = null;
+                    commentInput.focus();
+                };
+                emojiPicker.appendChild(btn);
+            });
+            emojiBtn.parentElement.appendChild(emojiPicker);
+            const rect = emojiBtn.getBoundingClientRect();
+            emojiPicker.style.position = 'absolute';
+            emojiPicker.style.bottom = '40px';
+            emojiPicker.style.left = '0';
+        });
+        
+        document.addEventListener('click', (e) => {
+            if (emojiPicker && !emojiPicker.contains(e.target) && e.target !== emojiBtn) {
+                emojiPicker.remove();
+                emojiPicker = null;
+            }
+        });
+        
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+        
+        // Theme toggle
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+        document.getElementById('themeToggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isDark = !document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeToggle').innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        });
+        initTheme();
+    </script>
+</body>
+</html>

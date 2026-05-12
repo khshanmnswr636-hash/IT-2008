@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+        <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- ================= BASIC META ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>من نحن - IT Management Business</title>
+
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="/images/IT.png">
+    <link rel="apple-touch-icon" href="/images/IT.png">
+
+    <!-- ================= OPEN GRAPH ================= -->
+    <meta property="og:image" content="https://linkversa.sbs/images/IT.png">
+    <meta name="twitter:image" content="https://linkversa.sbs/images/IT.png">
+
+    <!-- ================= FONTS ================= -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- ================= FONT AWESOME ================= -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        /* ============================================ */
+        /* الأساسيات والتنسيقات العامة */
+        /* ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: #0f172a;
+        }
+
+        /* الوضع الليلي */
+        body.dark {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #f1f5f9;
+        }
+
+        body.dark .card,
+        body.dark .stat-card,
+        body.dark .team-card,
+        body.dark .value-card,
+        body.dark .contact-info-box {
+            background: #1e293b;
+            color: #f1f5f9;
+        }
+
+        body.dark footer {
+            background: #020617;
+        }
+
+        /* ============================================ */
+        /* شريط التنقل */
+        /* ============================================ */
+        nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        body.dark nav {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #334155;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .nav-links a {
+            color: #cbd5e1;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: #0284c7;
+            color: white;
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .icon-btn {
+            background: #334155;
+            color: white;
+        }
+
+        .icon-btn:hover {
+            background: #0284c7;
+            color: white;
+        }
+
+        .auth-link {
+            text-decoration: none;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            padding: 0.5rem 1.2rem;
+            border-radius: 2rem;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .auth-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(2, 132, 199, 0.3);
+        }
+
+        /* ============================================ */
+        /* رأس الصفحة */
+        /* ============================================ */
+        .page-header {
+            text-align: center;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #64748b;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        body.dark .page-header p {
+            color: #94a3b8;
+        }
+
+        /* ============================================ */
+        /* قسم من نحن */
+        /* ============================================ */
+        .about-section {
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .about-text h2 {
+            font-size: 2rem;
+            color: #0284c7;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            line-height: 1.8;
+            color: #475569;
+            margin-bottom: 1rem;
+        }
+
+        body.dark .about-text p {
+            color: #cbd5e1;
+        }
+
+        .about-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0284c7;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+
+        .about-image {
+            flex: 1;
+            min-width: 280px;
+            text-align: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ============================================ */
+        /* الرؤية والرسالة */
+        /* ============================================ */
+        .vision-mission {
+            padding: 3rem 5%;
+            background: #e0f2fe;
+        }
+
+        body.dark .vision-mission {
+            background: #0f172a;
+        }
+
+        .vm-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vm-card {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .vm-card {
+            background: #1e293b;
+        }
+
+        .vm-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .vm-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .vm-icon i {
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .vm-card h3 {
+            font-size: 1.5rem;
+            color: #0284c7;
+            margin-bottom: 1rem;
+        }
+
+        .vm-card p {
+            line-height: 1.8;
+            color: #475569;
+        }
+
+        body.dark .vm-card p {
+            color: #cbd5e1;
+        }
+
+        /* ============================================ */
+        /* القيم الأساسية */
+        /* ============================================ */
+        .values-section {
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 60px;
+            height: 4px;
+            background: #0284c7;
+            border-radius: 2px;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .value-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .value-card {
+            background: #1e293b;
+        }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .value-icon {
+            width: 70px;
+            height: 70px;
+            background: #e0f2fe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        body.dark .value-icon {
+            background: #334155;
+        }
+
+        .value-icon i {
+            font-size: 2rem;
+            color: #0284c7;
+        }
+
+        .value-card h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #0284c7;
+        }
+
+        .value-card p {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        body.dark .value-card p {
+            color: #94a3b8;
+        }
+
+        /* ============================================ */
+        /* فريق العمل */
+        /* ============================================ */
+        .team-section {
+            padding: 3rem 5%;
+            background: #e0f2fe;
+        }
+
+        body.dark .team-section {
+            background: #0f172a;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        body.dark .team-card {
+            background: #1e293b;
+        }
+
+        .team-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .team-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto 1rem;
+        }
+
+        .team-avatar i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .team-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+            color: #0284c7;
+        }
+
+        .team-role {
+            color: #f59e0b;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-desc {
+            color: #64748b;
+            font-size: 0.85rem;
+            padding: 0 1rem 1rem;
+            line-height: 1.6;
+        }
+
+        body.dark .team-desc {
+            color: #94a3b8;
+        }
+
+        /* ============================================ */
+        /* معلومات التواصل */
+        /* ============================================ */
+        .contact-info-section {
+            padding: 3rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .contact-info-box {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+        }
+
+        body.dark .contact-info-box {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        .contact-info-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .contact-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .contact-info-box h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #0284c7;
+        }
+
+        .contact-info-box .contact-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-box a {
+            color: #0f172a;
+            text-decoration: none;
+        }
+
+        body.dark .contact-info-box a {
+            color: #f1f5f9;
+        }
+
+        .contact-info-box a:hover {
+            color: #0284c7;
+        }
+
+        .copy-btn {
+            background: #f1f5f9;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark .copy-btn {
+            background: #334155;
+            color: white;
+        }
+
+        .copy-btn:hover {
+            background: #0284c7;
+            color: white;
+        }
+
+        /* ============================================ */
+        /* قسم اتصل بنا */
+        /* ============================================ */
+        .cta-section {
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            padding: 4rem 5%;
+            text-align: center;
+            margin: 2rem 5%;
+            border-radius: 2rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-btn {
+            background: white;
+            color: #0284c7;
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ============================================ */
+        /* التذييل */
+        /* ============================================ */
+        footer {
+            background: #0f172a;
+            padding: 3rem 5% 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 2;
+        }
+
+        .footer-section a:hover {
+            color: #0284c7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #0284c7;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #64748b;
+        }
+
+        /* ============================================ */
+        /* زر العودة للأعلى */
+        /* ============================================ */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #0284c7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            background: #0369a1;
+        }
+
+        .back-to-top i {
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        /* ============================================ */
+        /* تنبيه منبثق */
+        /* ============================================ */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 2rem;
+            z-index: 1000;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* ============================================ */
+        /* استجابة للجوال */
+        /* ============================================ */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .about-container {
+                flex-direction: column;
+            }
+            
+            .about-stats {
+                justify-content: center;
+            }
+            
+            .vm-container {
+                flex-direction: column;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل -->
+    <nav>
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-chalkboard-user"></i>
+            </div>
+            <div class="logo-text">IT Management Business</div>
+        </div>
+        <ul class="nav-links">
+<li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-user"></i> ملفي الشخصي</a></li>
+            <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> الدورات</a></li>
+            <li><a href="about.html"><i class="fas fa-building"></i> من نحن</a></li>
+            <li><a href="support.html"><i class="fas fa-headset"></i> الدعم الفني</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> التواصل</a></li>
+            <li><a href="comments.html"><i class="fas fa-envelope"></i> التعليقات</a></li>
+        </ul>
+        <div class="nav-controls">
+            <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+            <div id="authStatus">
+                <a href="auth.html" id="loginBtn" class="auth-link"><i class="fas fa-user"></i> دخول</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- رأس الصفحة -->
+    <div class="page-header">
+        <h1><i class="fas fa-building"></i> من نحن</h1>
+        <p>تعرف على منصة IT Management Business وفريق العمل والقيم التي نؤمن بها</p>
+    </div>
+
+    <!-- قسم من نحن -->
+    <div class="about-section">
+        <div class="about-container">
+            <div class="about-text">
+                <h2>مرحباً بكم في <span style="color: #0284c7;">IT Management Business</span></h2>
+                <p>
+                    نحن منصة تعليمية رائدة متخصصة في تقديم دورات احترافية في مجالات 
+                    <strong>إدارة الأعمال وتكنولوجيا المعلومات</strong>. نهدف إلى تمكين الشباب العربي 
+                    بالمهارات التقنية والإدارية المطلوبة في سوق العمل الحديث.
+                </p>
+                <p>
+                    تأسست منصتنا على يد فريق من الخبراء والمتخصصين الذين يمتلكون خبرات عملية 
+                    وأكاديمية واسعة، لنقدم محتوى تعليمي متميز يجمع بين النظري والتطبيقي.
+                </p>
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-label">طالب مستفيد</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">دورة تدريبية</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">20+</div>
+                        <div class="stat-label">خبير معتمد</div>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://placehold.co/500x400/0284c7/white?text=IT+Management+Business" alt="عن المنصة">
+            </div>
+        </div>
+    </div>
+
+    <!-- الرؤية والرسالة -->
+    <div class="vision-mission">
+        <div class="vm-container">
+            <div class="vm-card">
+                <div class="vm-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>رؤيتنا</h3>
+                <p>
+                    أن نكون المنصة الرائدة في العالم العربي في مجال التعليم الإداري والتقني، 
+                    وأن نساهم في بناء جيل قادر على قيادة المستقبل الرقمي.
+                </p>
+            </div>
+            <div class="vm-card">
+                <div class="vm-icon">
+                    <i class="fas fa-flag-checkered"></i>
+                </div>
+                <h3>رسالتنا</h3>
+                <p>
+                    تقديم محتوى تعليمي احترافي بجودة عالية، وتوفير بيئة تعلم تفاعلية 
+                    تساعد الطلاب على اكتساب المهارات العملية المطلوبة.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- القيم الأساسية -->
+    <div class="values-section">
+        <h2 class="section-title">قيمنا الأساسية</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h4>الجودة</h4>
+                <p>نحرص على تقديم محتوى تعليمي عالي الجودة يلبي احتياجات الطلاب.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h4>المصداقية</h4>
+                <p>نلتزم بالشفافية والمصداقية في جميع خدماتنا ومحتواه.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <h4>الابتكار</h4>
+                <p>نتبنى أحدث الأساليب التعليمية والتقنية لتطوير المنصة.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h4>التمكين</h4>
+                <p>نسعى لتمكين الشباب العربي بالمهارات اللازمة لسوق العمل.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- فريق العمل -->
+    <div class="team-section">
+        <h2 class="section-title">فريق العمل</h2>
+        <div class="team-grid">
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <h3>محمد الخشانمن</h3>
+                <div class="team-role">المؤسس والمدير التنفيذي</div>
+                <p class="team-desc">خبير في إدارة الأعمال وتكنولوجيا المعلومات، حاصل على شهادات دولية في القيادة والابتكار.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <h3>أحمد الشامي</h3>
+                <div class="team-role">مدير العمليات</div>
+                <p class="team-desc">خبرة 10 سنوات في إدارة المشاريع التعليمية والتقنية، حاصل على PMP وITIL.</p>
+            </div>
+            <div class="team-card">
+                <div class="team-avatar">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>سارة يوسف</h3>
+                <div class="team-role">المديرة التقنية</div>
+                <p class="team-desc">متخصصة في تطوير المنصات التعليمية والذكاء الاصطناعي، حاصلة على ماجستير في علوم الحاسوب.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- معلومات التواصل -->
+    <div class="contact-info-section">
+        <h2 class="section-title">معلومات التواصل</h2>
+        <div class="contact-grid">
+            <div class="contact-info-box">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3>رقم الهاتف</h3>
+                <div class="contact-value">
+                    <a href="tel:+962796198093">0796198093</a>
+                </div>
+                <button class="copy-btn" onclick="copyText('0796198093')">
+                    <i class="fas fa-copy"></i> نسخ الرقم
+                </button>
+            </div>
+            <div class="contact-info-box">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3>البريد الإلكتروني</h3>
+                <div class="contact-value">
+                    <a href="mailto:khshanmnswr636@gmail.com">khshanmnswr636@gmail.com</a>
+                </div>
+                <button class="copy-btn" onclick="copyText('khshanmnswr636@gmail.com')">
+                    <i class="fas fa-copy"></i> نسخ البريد
+                </button>
+            </div>
+            <div class="contact-info-box">
+                <div class="contact-icon">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <h3>إنستغرام</h3>
+                <div class="contact-value">
+                    <a href="https://www.instagram.com/mhnd___90/" target="_blank">@mhnd___90</a>
+                </div>
+                <button class="copy-btn" onclick="window.open('https://www.instagram.com/mhnd___90/', '_blank')">
+                    <i class="fab fa-instagram"></i> زيارة الصفحة
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- قسم اتصل بنا -->
+    <div class="cta-section">
+        <h2>هل لديك استفسار؟</h2>
+        <p>تواصل مع فريق الدعم الفني لدينا وسنقوم بالرد عليك في أقرب وقت</p>
+        <a href="support.html" class="cta-btn"><i class="fas fa-headset"></i> تواصل مع الدعم</a>
+    </div>
+
+    <!-- التذييل -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>IT Management Business</h3>
+                <p>منصة تعليمية متخصصة في مجالات إدارة الأعمال وتكنولوجيا المعلومات.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/mhnd___90/" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>روابط سريعة</h3>
+                <p><a href="index.html">الرئيسية</a></p>
+                <p><a href="courses.html">الدورات</a></p>
+                <p><a href="about.html">من نحن</a></p>
+                <p><a href="support.html">الدعم الفني</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>معلومات الاتصال</h3>
+                <p><i class="fas fa-phone"></i> <a href="tel:+962796198093">0796198093</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:khshanmnswr636@gmail.com">khshanmnswr636@gmail.com</a></p>
+                <p><i class="fab fa-instagram"></i> <a href="https://www.instagram.com/mhnd___90/" target="_blank">@mhnd___90</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 IT Management Business - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <!-- زر العودة للأعلى -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // ============================================
+        // تبديل الوضع (ليلي/صباحي)
+        // ============================================
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                const themeBtn = document.getElementById('themeToggle');
+                if (themeBtn) themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            const isDark = document.body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            const themeBtn = document.getElementById('themeToggle');
+            if (themeBtn) {
+                themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            }
+        }
+
+        initTheme();
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+
+        // ============================================
+        // نسخ النص
+        // ============================================
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('تم النسخ بنجاح!');
+            });
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerHTML = '<i class="fas fa-check-circle"></i> ' + message;
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                toast.remove();
+            }, 3000);
+        }
+
+        // ============================================
+        // زر العودة للأعلى
+        // ============================================
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('show');
+            } else {
+                backToTop.classList.remove('show');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ============================================
+        // حالة تسجيل الدخول
+        // ============================================
+        function updateAuthUI() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const authStatus = document.getElementById('authStatus');
+            if (authStatus) {
+                if (currentUser) {
+                    authStatus.innerHTML = `
+                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                            <span style="background: #0284c7; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; font-size: 0.9rem;">
+                                <i class="fas fa-user-circle"></i> ${currentUser.name}
+                            </span>
+                            <button id="logoutBtn" style="background: #ef4444; border: none; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; cursor: pointer;">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                    const logoutBtn = document.getElementById('logoutBtn');
+                    if (logoutBtn) {
+                        logoutBtn.addEventListener('click', () => {
+                            localStorage.removeItem('currentUser');
+                            window.location.reload();
+                        });
+                    }
+                }
+            }
+        }
+        updateAuthUI();
+    </script>
+</body>
+</html>

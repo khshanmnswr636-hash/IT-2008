@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+
+    <!-- ================= BASIC META ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>الاختبار - IT Management Business Academy</title>
+        <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="/images/IT.png">
+    <link rel="apple-touch-icon" href="/images/IT.png">
+
+    <!-- ================= OPEN GRAPH ================= -->
+    <meta property="og:image" content="https://linkversa.sbs/images/IT.png">
+    <meta name="twitter:image" content="https://linkversa.sbs/images/IT.png">
+
+    <!-- ================= FONTS ================= -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Tajawal:wght@300;400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+
+<style>
+:root{--teal:#0d9488;--teal-light:#14b8a6;--teal-dark:#0f766e;--teal-glow:rgba(13,148,136,0.35);--navy:#0a1628;--navy-mid:#0f2040;--navy-card:rgba(15,32,64,0.85);--text:#e2f0f0;--text-muted:#8ab0b0;--border:rgba(13,148,136,0.2);--gold:#f59e0b;--red:#ef4444;--green:#22c55e;}
+[data-theme="light"]{--navy:#e8f4f4;--navy-mid:#d0eaea;--navy-card:rgba(255,255,255,0.95);--text:#0a2020;--text-muted:#2a6060;--border:rgba(13,148,136,0.25);--teal-glow:rgba(13,148,136,0.15);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--navy);color:var(--text);font-family:'Cairo','Tajawal',sans-serif;min-height:100vh;transition:background 0.4s,color 0.4s;}
+.bg-mesh{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse 80% 60% at 20% 10%,rgba(13,148,136,0.18) 0%,transparent 60%),var(--navy);}
+
+/* NAV */
+nav{background:rgba(10,22,40,0.82);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 30px;display:flex;justify-content:space-between;align-items:center;height:70px;}
+[data-theme="light"] nav{background:rgba(232,244,244,0.88);}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-icon{width:44px;height:44px;background:linear-gradient(135deg,var(--teal),var(--teal-dark));border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#fff;box-shadow:0 0 20px var(--teal-glow);}
+.logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.logo-main{font-size:18px;font-weight:900;color:var(--teal-light);}
+.logo-sub{font-size:10px;color:var(--text-muted);font-weight:400;letter-spacing:1px;}
+.nav-actions{display:flex;gap:10px;align-items:center;}
+.btn-lang{background:rgba(13,148,136,0.12);border:1px solid var(--border);color:var(--teal-light);padding:7px 14px;border-radius:50px;cursor:pointer;font-size:14px;font-weight:700;font-family:'Cairo',sans-serif;transition:all 0.3s;}
+.btn-theme{width:38px;height:38px;background:rgba(13,148,136,0.12);border:1px solid var(--border);border-radius:50%;cursor:pointer;font-size:18px;transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+
+/* MAIN */
+main{max-width:800px;margin:0 auto;padding:40px 20px 80px;}
+
+/* INTRO */
+#introSection{text-align:center;padding:60px 20px;}
+.intro-icon{font-size:80px;margin-bottom:20px;display:block;}
+#introSection h1{font-size:clamp(28px,4vw,48px);font-weight:900;margin-bottom:16px;}
+#introSection p{font-size:18px;color:var(--text-muted);margin-bottom:30px;line-height:1.8;}
+.info-boxes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:30px 0;}
+.info-box{background:var(--navy-card);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;backdrop-filter:blur(12px);}
+.info-box .ib-num{font-size:32px;font-weight:900;color:var(--teal-light);}
+.info-box .ib-label{font-size:13px;color:var(--text-muted);}
+.btn-start{background:linear-gradient(135deg,var(--teal),var(--teal-dark));color:#fff;padding:18px 48px;border-radius:50px;border:none;font-size:20px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 6px 30px var(--teal-glow);transition:all 0.3s;}
+.btn-start:hover{transform:translateY(-3px);box-shadow:0 10px 40px var(--teal-glow);}
+
+/* EXAM */
+#examSection{display:none;}
+.exam-header{
+  background:var(--navy-card);border:1px solid var(--border);
+  border-radius:20px;padding:20px 28px;
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:24px;backdrop-filter:blur(12px);
+  flex-wrap:wrap;gap:12px;
+}
+.exam-progress{flex:1;min-width:200px;}
+.progress-text{font-size:14px;color:var(--text-muted);margin-bottom:6px;display:flex;justify-content:space-between;}
+.progress-bar{height:6px;background:rgba(255,255,255,0.1);border-radius:6px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--teal-light));border-radius:6px;transition:width 0.5s ease;}
+.timer-box{
+  background:rgba(13,148,136,0.12);border:1px solid var(--border);
+  border-radius:12px;padding:10px 20px;text-align:center;
+}
+.timer-num{font-size:28px;font-weight:900;color:var(--teal-light);font-variant-numeric:tabular-nums;}
+.timer-label{font-size:11px;color:var(--text-muted);}
+
+.question-card{
+  background:var(--navy-card);border:1px solid var(--border);
+  border-radius:24px;padding:36px;
+  backdrop-filter:blur(12px);
+  animation:slideIn 0.4s ease;
+}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+
+.q-num{font-size:13px;color:var(--teal-light);font-weight:700;margin-bottom:12px;letter-spacing:1px;}
+.q-text{font-size:20px;font-weight:700;margin-bottom:28px;line-height:1.6;}
+
+.options{display:flex;flex-direction:column;gap:12px;}
+.option{
+  padding:16px 20px;
+  background:rgba(13,148,136,0.05);
+  border:1px solid var(--border);
+  border-radius:14px;cursor:pointer;
+  font-size:16px;font-weight:600;
+  transition:all 0.3s;
+  display:flex;align-items:center;gap:14px;
+}
+.option:hover:not(.locked){background:rgba(13,148,136,0.15);border-color:var(--teal);color:var(--teal-light);}
+.option.selected{background:rgba(13,148,136,0.2);border-color:var(--teal);}
+.option.correct{background:rgba(34,197,94,0.15);border-color:var(--green);color:#4ade80;}
+.option.wrong{background:rgba(239,68,68,0.15);border-color:var(--red);color:#f87171;}
+.opt-letter{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(13,148,136,0.15);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;flex-shrink:0;
+}
+
+.btn-next{
+  margin-top:28px;width:100%;
+  background:linear-gradient(135deg,var(--teal),var(--teal-dark));
+  color:#fff;padding:16px;border-radius:14px;
+  border:none;font-size:18px;font-weight:700;
+  cursor:pointer;font-family:'Cairo',sans-serif;
+  transition:all 0.3s;box-shadow:0 4px 20px var(--teal-glow);
+}
+.btn-next:hover{transform:translateY(-2px);}
+.btn-next:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+/* RESULT */
+#resultSection{display:none;text-align:center;padding:40px 20px;}
+.result-circle{
+  width:160px;height:160px;border-radius:50%;
+  margin:0 auto 30px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border:6px solid;
+  position:relative;
+  animation:scaleIn 0.6s ease both;
+}
+@keyframes scaleIn{from{transform:scale(0);opacity:0;}to{transform:scale(1);opacity:1;}}
+.result-circle.pass{border-color:var(--green);background:rgba(34,197,94,0.1);}
+.result-circle.fail{border-color:var(--red);background:rgba(239,68,68,0.1);}
+.result-score{font-size:48px;font-weight:900;}
+.result-circle.pass .result-score{color:#4ade80;}
+.result-circle.fail .result-score{color:#f87171;}
+.result-label{font-size:14px;color:var(--text-muted);}
+.result-title{font-size:32px;font-weight:900;margin-bottom:12px;}
+.result-msg{font-size:17px;color:var(--text-muted);margin-bottom:30px;line-height:1.7;}
+.result-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.btn-cert{background:linear-gradient(135deg,var(--gold),#d97706);color:#fff;padding:16px 36px;border-radius:50px;border:none;font-size:18px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 4px 20px rgba(245,158,11,0.4);transition:all 0.3s;}
+.btn-cert:hover{transform:translateY(-2px);}
+.btn-retry{background:rgba(13,148,136,0.15);border:1px solid var(--border);color:var(--teal-light);padding:16px 36px;border-radius:50px;font-size:18px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.3s;}
+.btn-retry:hover{background:rgba(13,148,136,0.25);}
+
+/* CERTIFICATE */
+#certSection{display:none;}
+.cert-wrapper{
+  background:#fff;color:#1a1a1a;
+  border-radius:24px;overflow:hidden;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+  max-width:750px;margin:0 auto;
+}
+.cert-top{
+  background:linear-gradient(135deg,#0d9488,#0f766e);
+  padding:30px 40px;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:20px;
+}
+.cert-logo{font-size:28px;font-weight:900;color:#fff;}
+.cert-logo-icon{width:50px;height:50px;background:rgba(255,255,255,0.2);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:#fff;}
+.cert-body{padding:50px 60px;text-align:center;}
+.cert-title-ar{font-size:14px;color:#0d9488;font-weight:700;letter-spacing:2px;margin-bottom:8px;}
+.cert-main{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;color:#1a1a1a;margin-bottom:8px;}
+.cert-subtitle{font-size:16px;color:#666;margin-bottom:30px;}
+.cert-name{font-size:40px;font-weight:900;color:#0d9488;font-family:'Cairo',sans-serif;border-bottom:3px solid #14b8a6;display:inline-block;padding-bottom:8px;margin-bottom:24px;}
+.cert-course-label{font-size:15px;color:#666;margin-bottom:8px;}
+.cert-course{font-size:24px;font-weight:800;color:#1a1a1a;margin-bottom:24px;}
+.cert-score-box{display:inline-flex;gap:30px;background:#f0fafa;border:2px solid #14b8a6;border-radius:16px;padding:16px 30px;margin-bottom:30px;}
+.cert-score-item{text-align:center;}
+.cert-score-num{font-size:28px;font-weight:900;color:#0d9488;}
+.cert-score-label{font-size:12px;color:#666;}
+.cert-date{font-size:14px;color:#999;margin-bottom:20px;}
+.cert-warning{
+  font-size:12px;color:#999;
+  border-top:1px solid #eee;padding-top:16px;margin-top:10px;
+  font-style:italic;
+}
+.cert-bottom{
+  background:#f8f8f8;padding:20px 40px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:10px;
+  border-top:1px solid #eee;
+}
+.cert-seal{font-size:40px;}
+.cert-id{font-size:12px;color:#999;}
+
+.cert-actions{display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap;}
+.btn-print{background:linear-gradient(135deg,#0d9488,#0f766e);color:#fff;padding:14px 32px;border-radius:50px;border:none;font-size:16px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 4px 20px rgba(13,148,136,0.4);transition:all 0.3s;}
+.btn-print:hover{transform:translateY(-2px);}
+.btn-back-home{background:rgba(13,148,136,0.15);border:1px solid rgba(13,148,136,0.3);color:#0d9488;padding:14px 32px;border-radius:50px;font-size:16px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;transition:all 0.3s;text-decoration:none;display:inline-block;}
+
+@media print{nav,.cert-actions,#introSection,#examSection,#resultSection{display:none!important;}#certSection{display:block!important;}body{background:#fff;}}
+@media(max-width:600px){.info-boxes{grid-template-columns:1fr;}.cert-body{padding:30px 20px;}.cert-main{font-size:26px;}.cert-name{font-size:28px;}.result-btns{flex-direction:column;}}
+
+[data-lang="en"] .ar{display:none!important;}
+[data-lang="ar"] .en{display:none!important;}
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-icon">IT</div>
+    <div class="logo-text">
+      <span class="logo-main">IT mgmt</span>
+      <span class="logo-sub">Business Academy</span>
+    </div>
+  </a>
+  <div class="nav-actions">
+    <button class="btn-lang" onclick="toggleLang()" id="langBtn">EN</button>
+    <button class="btn-theme" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<main>
+
+<!-- INTRO -->
+<div id="introSection">
+  <span class="intro-icon">📝</span>
+  <h1 class="ar">اختبار إتمام الدورة</h1>
+  <h1 class="en" style="display:none">Course Completion Exam</h1>
+  <p id="introCourseName" class="ar">تحقق من استعدادك للاختبار</p>
+  <p id="introCourseName_en" class="en" style="display:none">Check your readiness for the exam</p>
+
+  <div class="info-boxes">
+    <div class="info-box">
+      <div class="ib-num">15</div>
+      <div class="ib-label ar">سؤال</div>
+      <div class="ib-label en" style="display:none">Questions</div>
+    </div>
+    <div class="info-box">
+      <div class="ib-num">20</div>
+      <div class="ib-label ar">دقيقة</div>
+      <div class="ib-label en" style="display:none">Minutes</div>
+    </div>
+    <div class="info-box">
+      <div class="ib-num">7/15</div>
+      <div class="ib-label ar">للنجاح</div>
+      <div class="ib-label en" style="display:none">To Pass</div>
+    </div>
+  </div>
+
+  <button class="btn-start" onclick="startExam()">
+    <span class="ar">🚀 ابدأ الاختبار</span>
+    <span class="en" style="display:none">🚀 Start Exam</span>
+  </button>
+</div>
+
+<!-- EXAM -->
+<div id="examSection">
+  <div class="exam-header">
+    <div class="exam-progress">
+      <div class="progress-text">
+        <span class="ar" id="qProgress">السؤال 1 من 15</span>
+        <span class="en" style="display:none" id="qProgress_en">Question 1 of 15</span>
+        <span id="scoreTrack">0/0 ✓</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    </div>
+    <div class="timer-box">
+      <div class="timer-num" id="timerDisplay">20:00</div>
+      <div class="timer-label ar">الوقت المتبقي</div>
+      <div class="timer-label en" style="display:none">Time Left</div>
+    </div>
+  </div>
+
+  <div class="question-card" id="questionCard">
+    <div class="q-num" id="qNum"></div>
+    <div class="q-text" id="qText"></div>
+    <div class="options" id="optionsContainer"></div>
+    <button class="btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+      <span class="ar">التالي →</span>
+      <span class="en" style="display:none">Next →</span>
+    </button>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="resultSection">
+  <div class="result-circle" id="resultCircle">
+    <div class="result-score" id="resultScore"></div>
+    <div class="result-label ar">من 15</div>
+    <div class="result-label en" style="display:none">out of 15</div>
+  </div>
+  <h2 class="result-title" id="resultTitle"></h2>
+  <p class="result-msg" id="resultMsg"></p>
+  <div class="result-btns" id="resultBtns"></div>
+</div>
+
+<!-- CERTIFICATE -->
+<div id="certSection">
+  <div class="cert-wrapper" id="certWrapper">
+    <div class="cert-top">
+      <div class="cert-logo-icon">IT</div>
+      <div class="cert-logo">IT mgmt Business Academy</div>
+    </div>
+    <div class="cert-body">
+      <div class="cert-title-ar ar">شهادة إتمام الدورة</div>
+      <div class="cert-title-ar en" style="display:none">CERTIFICATE OF COMPLETION</div>
+      <div class="cert-main ar">شهادة إتمام</div>
+      <div class="cert-main en" style="display:none">Certificate of Completion</div>
+      <div class="cert-subtitle ar">هذه الشهادة تُمنح لـ</div>
+      <div class="cert-subtitle en" style="display:none">This certificate is awarded to</div>
+      <div class="cert-name" id="certName">—</div><br>
+      <div class="cert-course-label ar">لإتمام دورة</div>
+      <div class="cert-course-label en" style="display:none">For successfully completing</div>
+      <div class="cert-course" id="certCourse">—</div>
+      <div class="cert-score-box">
+        <div class="cert-score-item">
+          <div class="cert-score-num" id="certScore">—</div>
+          <div class="cert-score-label ar">الدرجة</div>
+          <div class="cert-score-label en" style="display:none">Score</div>
+        </div>
+        <div class="cert-score-item">
+          <div class="cert-score-num" id="certPercent">—</div>
+          <div class="cert-score-label ar">النسبة</div>
+          <div class="cert-score-label en" style="display:none">Percentage</div>
+        </div>
+        <div class="cert-score-item">
+          <div class="cert-score-num">✓</div>
+          <div class="cert-score-label ar">ناجح</div>
+          <div class="cert-score-label en" style="display:none">Pass</div>
+        </div>
+      </div>
+      <div class="cert-date" id="certDate">—</div>
+      <div class="cert-warning">
+        ⚠️ <span class="ar">تنبيه: هذه الشهادة غير معتمدة رسمياً وتُعبّر فقط عن إتمام الطالب للمحتوى التعليمي على منصة IT mgmt Business Academy</span>
+        <span class="en" style="display:none">Warning: This certificate is NOT officially accredited and only reflects the student's completion of educational content on the IT mgmt Business Academy platform</span>
+      </div>
+    </div>
+    <div class="cert-bottom">
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#0d9488;">IT mgmt Business Academy</div>
+        <div class="cert-id" id="certId">ID: —</div>
+      </div>
+      <div class="cert-seal">🎓</div>
+      <div style="font-size:12px;color:#999;text-align:right;">
+        <div class="ar">منصة تعليم تقني</div>
+        <div class="en" style="display:none">Tech Learning Platform</div>
+        <div>2026</div>
+      </div>
+    </div>
+  </div>
+  <div class="cert-actions">
+    <button class="btn-print" onclick="window.print()">
+      <span class="ar">🖨️ طباعة الشهادة</span>
+      <span class="en" style="display:none">🖨️ Print Certificate</span>
+    </button>
+    <a href="courses.html" class="btn-back-home ar">← العودة للدورات</a>
+    <a href="courses.html" class="btn-back-home en" style="display:none">← Back to Courses</a>
+  </div>
+</div>
+
+</main>
+
+<script>
+function toggleTheme(){const html=document.documentElement;const isDark=html.getAttribute('data-theme')==='dark';html.setAttribute('data-theme',isDark?'light':'dark');document.getElementById('themeBtn').textContent=isDark?'🌙':'☀️';localStorage.setItem('theme',isDark?'light':'dark');}
+(function(){const t=localStorage.getItem('theme')||'dark';document.documentElement.setAttribute('data-theme',t);document.getElementById('themeBtn').textContent=t==='dark'?'🌙':'☀️';})();
+function toggleLang(){const html=document.documentElement;const isAr=html.getAttribute('data-lang')==='ar';const newLang=isAr?'en':'ar';html.setAttribute('data-lang',newLang);html.setAttribute('dir',newLang==='ar'?'rtl':'ltr');document.getElementById('langBtn').textContent=isAr?'AR':'EN';document.querySelectorAll('.ar').forEach(el=>el.style.display=newLang==='ar'?'':'none');document.querySelectorAll('.en').forEach(el=>el.style.display=newLang==='en'?'':'none');localStorage.setItem('lang',newLang);}
+(function(){const l=localStorage.getItem('lang')||'ar';document.documentElement.setAttribute('data-lang',l);document.documentElement.setAttribute('dir',l==='ar'?'rtl':'ltr');document.getElementById('langBtn').textContent=l==='ar'?'EN':'AR';if(l==='en'){document.querySelectorAll('.ar').forEach(el=>el.style.display='none');document.querySelectorAll('.en').forEach(el=>el.style.display='');}})();
+
+// QUESTIONS DATA
+const coursesData={
+  programming:{
+    ar:'البرمجة وتطوير الويب',en:'Programming & Web Dev',
+    questions:[
+      {q:{ar:'ما هو لغة برمجة تُستخدم لبناء هيكل صفحات الويب؟',en:'Which language is used to build web page structure?'},o:{ar:['Python','HTML','Java','C++'],en:['Python','HTML','Java','C++']},a:1},
+      {q:{ar:'ما الذي يستخدم CSS لـ؟',en:'What is CSS used for?'},o:{ar:['قواعد البيانات','الخوارزميات','تنسيق وتصميم صفحات الويب','إدارة الخوادم'],en:['Databases','Algorithms','Styling web pages','Server management']},a:2},
+      {q:{ar:'ما هو JavaScript؟',en:'What is JavaScript?'},o:{ar:['لغة قواعد بيانات','لغة برمجة للواجهة التفاعلية','نظام تشغيل','برنامج تصميم'],en:['Database language','Interactive front-end language','Operating system','Design program']},a:1},
+      {q:{ar:'ما معنى "Responsive Design"؟',en:'What does "Responsive Design" mean?'},o:{ar:['تصميم سريع','تصميم يتكيف مع مختلف الأجهزة','تصميم متحرك','تصميم بالألوان'],en:['Fast design','Design that adapts to all devices','Animated design','Colorful design']},a:1},
+      {q:{ar:'ما هو الـ DOM في JavaScript؟',en:'What is the DOM in JavaScript?'},o:{ar:['نوع بيانات','واجهة للتفاعل مع HTML','إطار عمل','قاعدة بيانات'],en:['Data type','Interface to interact with HTML','Framework','Database']},a:1},
+      {q:{ar:'أي من التالي لغة تستخدم للـ Back-End؟',en:'Which is a Back-End language?'},o:{ar:['HTML','CSS','Node.js','Photoshop'],en:['HTML','CSS','Node.js','Photoshop']},a:2},
+      {q:{ar:'ما هي وظيفة الـ <div> في HTML؟',en:'What is the role of <div> in HTML?'},o:{ar:['إدراج صورة','تقسيم وتنظيم المحتوى','إنشاء رابط','إدراج فيديو'],en:['Insert image','Divide and organize content','Create a link','Insert video']},a:1},
+      {q:{ar:'ما هو Git؟',en:'What is Git?'},o:{ar:['لغة برمجة','نظام تتبع الإصدارات','قاعدة بيانات','برنامج تصميم'],en:['Programming language','Version control system','Database','Design tool']},a:1},
+      {q:{ar:'ما معنى API؟',en:'What does API stand for?'},o:{ar:['Application Programming Interface','Advanced Program Integration','Automated Protocol Interface','Application Processing Index'],en:['Application Programming Interface','Advanced Program Integration','Automated Protocol Interface','Application Processing Index']},a:0},
+      {q:{ar:'ما هي وظيفة الـ <a> في HTML؟',en:'What is the function of <a> in HTML?'},o:{ar:['إدراج صورة','إنشاء روابط تشعبية','إنشاء جدول','إدراج نموذج'],en:['Insert image','Create hyperlinks','Create table','Insert form']},a:1},
+      {q:{ar:'أي خاصية CSS تُستخدم لتغيير لون النص؟',en:'Which CSS property changes text color?'},o:{ar:['background-color','font-size','color','border'],en:['background-color','font-size','color','border']},a:2},
+      {q:{ar:'ما هو الـ Framework في البرمجة؟',en:'What is a Framework in programming?'},o:{ar:['نوع من قواعد البيانات','هيكل جاهز يسهّل عملية التطوير','برنامج تصميم الشبكات','نوع من الخوادم'],en:['Type of database','Ready-made structure that simplifies development','Network design software','Type of server']},a:1},
+      {q:{ar:'ما هي ميزة الـ Flexbox في CSS؟',en:'What is the advantage of Flexbox in CSS?'},o:{ar:['تغيير الخطوط','تنظيم العناصر في صفوف وأعمدة بسهولة','تطبيق الرسوم المتحركة','إدارة قواعد البيانات'],en:['Change fonts','Easily organize elements in rows and columns','Apply animations','Database management']},a:1},
+      {q:{ar:'ما هو الـ JSON؟',en:'What is JSON?'},o:{ar:['لغة برمجة','صيغة تبادل بيانات خفيفة','قاعدة بيانات','نظام تشغيل'],en:['Programming language','Lightweight data exchange format','Database','Operating system']},a:1},
+      {q:{ar:'ما هو الـ localhost؟',en:'What is localhost?'},o:{ar:['موقع إنترنت','خادم محلي على جهازك','قاعدة بيانات','مكتبة برمجية'],en:['A website','Local server on your device','Database','Programming library']},a:1}
+    ]
+  },
+  cybersecurity:{
+    ar:'الأمن السيبراني',en:'Cybersecurity',
+    questions:[
+      {q:{ar:'ما هو الغرض الرئيسي من جدار الحماية (Firewall)؟',en:'What is the main purpose of a Firewall?'},o:{ar:['تسريع الإنترنت','مراقبة وتصفية حركة الشبكة','تخزين البيانات','إدارة المستخدمين'],en:['Speed up internet','Monitor and filter network traffic','Store data','Manage users']},a:1},
+      {q:{ar:'ما هو هجوم الـ Phishing؟',en:'What is a Phishing attack?'},o:{ar:['اختراق الخوادم','انتحال هوية لسرقة معلومات','تشفير البيانات','مراقبة الشبكة'],en:['Hacking servers','Impersonation to steal information','Encrypting data','Network monitoring']},a:1},
+      {q:{ar:'ما معنى التشفير (Encryption)؟',en:'What does Encryption mean?'},o:{ar:['حذف البيانات','تحويل البيانات لصيغة غير مقروءة لحمايتها','نسخ البيانات','إرسال البيانات'],en:['Delete data','Convert data to unreadable format to protect it','Copy data','Send data']},a:1},
+      {q:{ar:'ما هو هجوم الـ DDoS؟',en:'What is a DDoS attack?'},o:{ar:['سرقة كلمات المرور','إرسال طلبات ضخمة لتعطيل الخادم','اختراق قواعد البيانات','إنشاء فيروسات'],en:['Stealing passwords','Sending massive requests to crash the server','Hacking databases','Creating viruses']},a:1},
+      {q:{ar:'ما هي المصادقة الثنائية 2FA؟',en:'What is Two-Factor Authentication (2FA)?'},o:{ar:['نوع من كلمات المرور','طبقة أمان إضافية تتطلب تحقق ثانٍ','برنامج مكافحة فيروسات','نوع من التشفير'],en:['Type of password','Extra security layer requiring second verification','Antivirus software','Type of encryption']},a:1},
+      {q:{ar:'ما هو الـ VPN؟',en:'What is a VPN?'},o:{ar:['برنامج تصفية المحتوى','شبكة خاصة افتراضية تحمي الاتصال','قاعدة بيانات آمنة','برنامج مكافحة فيروسات'],en:['Content filtering software','Virtual private network that secures connection','Secure database','Antivirus software']},a:1},
+      {q:{ar:'ما هو الفرق بين الـ White Hat و Black Hat Hacker؟',en:'What is the difference between White Hat and Black Hat hackers?'},o:{ar:['لا فرق','White Hat أخلاقي يعمل بإذن و Black Hat يخترق بشكل غير قانوني','Black Hat يعمل للحكومة','White Hat يبيع البيانات'],en:['No difference','White Hat is ethical with permission, Black Hat hacks illegally','Black Hat works for government','White Hat sells data']},a:1},
+      {q:{ar:'ما هو الـ Malware؟',en:'What is Malware?'},o:{ar:['برنامج مفيد','برنامج خبيث يضر بالأنظمة','قاعدة بيانات','نوع من التشفير'],en:['Useful software','Malicious software that harms systems','Database','Type of encryption']},a:1},
+      {q:{ar:'ما هو الـ SQL Injection؟',en:'What is SQL Injection?'},o:{ar:['طريقة تطوير قواعد بيانات','هجوم يدخل أوامر SQL ضارة في النموذج','نوع من التشفير','إدارة المستخدمين'],en:['Database development method','Attack that injects malicious SQL into forms','Type of encryption','User management']},a:1},
+      {q:{ar:'ما أهمية تحديث البرامج باستمرار؟',en:'Why is it important to update software regularly?'},o:{ar:['لتحسين المظهر','لإصلاح الثغرات الأمنية وتحسين الأداء','لزيادة الأسعار','لتغيير الواجهة'],en:['To improve appearance','To fix vulnerabilities and improve performance','To increase prices','To change the interface']},a:1},
+      {q:{ar:'ما هو الـ Penetration Testing؟',en:'What is Penetration Testing?'},o:{ar:['اختبار سرعة الشبكة','اختبار أخلاقي للثغرات قبل المهاجمين','نوع من التشفير','نسخ احتياطي للبيانات'],en:['Network speed test','Ethical testing of vulnerabilities before attackers','Type of encryption','Data backup']},a:1},
+      {q:{ar:'ما هو الـ Zero-Day Vulnerability؟',en:'What is a Zero-Day Vulnerability?'},o:{ar:['ثغرة قديمة','ثغرة غير معروفة لم يتم إصلاحها بعد','نوع من كلمات المرور','برنامج مكافحة فيروسات'],en:['Old vulnerability','Unknown vulnerability not yet patched','Type of password','Antivirus software']},a:1},
+      {q:{ar:'ما الفرق بين HTTP و HTTPS؟',en:'What is the difference between HTTP and HTTPS?'},o:{ar:['لا فرق','HTTPS مشفّر وأكثر أماناً من HTTP','HTTP أسرع دائماً','HTTPS للمواقع القديمة فقط'],en:['No difference','HTTPS is encrypted and more secure than HTTP','HTTP is always faster','HTTPS is only for old sites']},a:1},
+      {q:{ar:'ما هو الـ Ransomware؟',en:'What is Ransomware?'},o:{ar:['برنامج حماية','برنامج خبيث يشفّر البيانات ويطلب فدية','برنامج نسخ احتياطي','نوع من جدار الحماية'],en:['Protection software','Malware that encrypts data and demands ransom','Backup software','Type of firewall']},a:1},
+      {q:{ar:'ما أفضل ممارسة لإنشاء كلمة مرور قوية؟',en:'What is the best practice for creating a strong password?'},o:{ar:['استخدام اسمك وتاريخ ميلادك','استخدام مزيج من الأحرف والأرقام والرموز بطول كافٍ','استخدام كلمة واحدة بسيطة','استخدام نفس كلمة المرور لكل المواقع'],en:['Using your name and birthdate','Using mix of letters, numbers and symbols with sufficient length','Using one simple word','Using same password for all sites']},a:1}
+    ]
+  },
+  default:{
+    ar:'الدورة التعليمية',en:'Educational Course',
+    questions:[
+      {q:{ar:'ما هو التعلم الإلكتروني؟',en:'What is e-learning?'},o:{ar:['تعلم في الفصل فقط','تعلم عبر الإنترنت والتكنولوجيا','قراءة الكتب فقط','التعلم بالمراسلة'],en:['Classroom learning only','Learning via internet and technology','Reading books only','Correspondence learning']},a:1},
+      {q:{ar:'ما أهمية إدارة الوقت؟',en:'What is the importance of time management?'},o:{ar:['لزيادة الراحة','لإنجاز المهام بكفاءة وفي وقتها','لتجنب العمل','لتقليل الإنتاجية'],en:['To increase rest','To complete tasks efficiently and on time','To avoid work','To reduce productivity']},a:1},
+      {q:{ar:'ما هو التفكير النقدي؟',en:'What is critical thinking?'},o:{ar:['القبول بكل المعلومات','تحليل المعلومات وتقييمها بموضوعية','حفظ المعلومات فقط','رفض كل الأفكار'],en:['Accepting all information','Analyzing and evaluating information objectively','Memorizing information only','Rejecting all ideas']},a:1},
+      {q:{ar:'ما هي مهارة حل المشكلات؟',en:'What is problem-solving skill?'},o:{ar:['تجاهل المشاكل','تحديد المشكلة وإيجاد حلول فعّالة','الاعتماد على الآخرين دائماً','قبول المشكلة'],en:['Ignoring problems','Identifying the problem and finding effective solutions','Always relying on others','Accepting the problem']},a:1},
+      {q:{ar:'ما أهمية العمل الجماعي؟',en:'What is the importance of teamwork?'},o:{ar:['لا فائدة منه','يجمع الكفاءات ويحقق نتائج أفضل','يسبب المشاكل','يقلل الإنتاجية'],en:['No benefit','Combines competencies and achieves better results','Causes problems','Reduces productivity']},a:1},
+      {q:{ar:'ما هو التطوير المهني؟',en:'What is professional development?'},o:{ar:['تغيير المهنة','الاستمرار في تطوير المهارات والمعرفة','التوقف عن العمل','الحصول على راتب أعلى فقط'],en:['Changing career','Continuing to develop skills and knowledge','Stopping work','Just getting a higher salary']},a:1},
+      {q:{ar:'ما هو التواصل الفعّال؟',en:'What is effective communication?'},o:{ar:['الكلام الكثير','نقل الرسالة بوضوح والاستماع بفاعلية','الصمت دائماً','استخدام اللغة المعقدة'],en:['Talking a lot','Conveying the message clearly and listening actively','Always being silent','Using complex language']},a:1},
+      {q:{ar:'ما هدف التعليم المستمر؟',en:'What is the goal of continuous education?'},o:{ar:['الحصول على شهادات فقط','مواكبة التطورات وتطوير القدرات','قضاء الوقت','تجنب العمل'],en:['Only getting certificates','Keeping up with developments and improving abilities','Spending time','Avoiding work']},a:1},
+      {q:{ar:'ما هو الإبداع في بيئة العمل؟',en:'What is creativity in the workplace?'},o:{ar:['تكرار نفس الأساليب','تطوير أفكار وحلول جديدة وغير تقليدية','رفض التغيير','الالتزام الصارم بالروتين'],en:['Repeating the same methods','Developing new and unconventional ideas and solutions','Refusing change','Strict adherence to routine']},a:1},
+      {q:{ar:'ما أهمية الذكاء العاطفي؟',en:'What is the importance of emotional intelligence?'},o:{ar:['ليس مهماً','فهم وإدارة المشاعر لتحسين العلاقات والأداء','يضعف القرارات','يسبب المشاكل'],en:['Not important','Understanding and managing emotions to improve relationships and performance','Weakens decisions','Causes problems']},a:1},
+      {q:{ar:'ما هو الهدف الذكي SMART؟',en:'What is a SMART goal?'},o:{ar:['هدف كبير فقط','هدف محدد وقابل للقياس وقابل للتحقق وذو صلة ومحدد بوقت','هدف سهل','هدف غير واضح'],en:['Just a big goal','Specific, Measurable, Achievable, Relevant, Time-bound','An easy goal','An unclear goal']},a:1},
+      {q:{ar:'ما هو دور الملاحظات (Feedback) في التطور؟',en:'What is the role of feedback in development?'},o:{ar:['الانتقاد السلبي','أداة لتحديد نقاط القوة والضعف وتحسين الأداء','إرباك الموظفين','ليس لها أي دور'],en:['Negative criticism','Tool to identify strengths and weaknesses and improve performance','Confusing employees','Has no role']},a:1},
+      {q:{ar:'ما هي القيادة الفعّالة؟',en:'What is effective leadership?'},o:{ar:['إصدار الأوامر فقط','توجيه وإلهام الفريق لتحقيق الأهداف','التسلط على الآخرين','تجنب اتخاذ القرارات'],en:['Only giving orders','Guiding and inspiring the team to achieve goals','Dominating others','Avoiding decisions']},a:1},
+      {q:{ar:'ما أهمية الأخلاق المهنية؟',en:'What is the importance of professional ethics?'},o:{ar:['ليست ضرورية','تبني الثقة وتضمن بيئة عمل محترمة','تمنع التقدم','تقيد الحرية'],en:['Not necessary','Build trust and ensure a respectful work environment','Prevent progress','Restrict freedom']},a:1},
+      {q:{ar:'ما هو التخطيط الاستراتيجي؟',en:'What is strategic planning?'},o:{ar:['التخطيط اليومي فقط','وضع خطة طويلة المدى لتحقيق الأهداف الكبرى','العمل دون خطة','الانتظار والمراقبة'],en:['Only daily planning','Creating a long-term plan to achieve major goals','Working without a plan','Waiting and watching']},a:1}
+    ]
+  }
+};
+
+// Get course from URL
+const urlParams=new URLSearchParams(window.location.search);
+const courseKey=urlParams.get('course')||'default';
+const courseData=coursesData[courseKey]||coursesData.default;
+
+// Set intro text
+document.getElementById('introCourseName').textContent='دورة: '+courseData.ar;
+document.getElementById('introCourseName_en').textContent='Course: '+courseData.en;
+
+let currentQ=0,score=0,answered=0,timerInterval=null,timeLeft=1200;
+
+function startExam(){
+  document.getElementById('introSection').style.display='none';
+  document.getElementById('examSection').style.display='block';
+  showQuestion();
+  startTimer();
+}
+
+function startTimer(){
+  timerInterval=setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60);
+    const s=timeLeft%60;
+    document.getElementById('timerDisplay').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    if(timeLeft<=60)document.getElementById('timerDisplay').style.color='#ef4444';
+    if(timeLeft<=0){clearInterval(timerInterval);showResult();}
+  },1000);
+}
+
+function showQuestion(){
+  const q=courseData.questions[currentQ];
+  const lang=document.documentElement.getAttribute('data-lang')||'ar';
+  const total=courseData.questions.length;
+  document.getElementById('qProgress').textContent=`السؤال ${currentQ+1} من ${total}`;
+  document.getElementById('qProgress_en').textContent=`Question ${currentQ+1} of ${total}`;
+  document.getElementById('qNum').textContent=(lang==='ar'?'سؤال ':'Question ')+(currentQ+1);
+  document.getElementById('qText').textContent=q.q[lang]||q.q.ar;
+  document.getElementById('progressFill').style.width=((currentQ/total)*100)+'%';
+  document.getElementById('scoreTrack').textContent=`${score}/${answered} ✓`;
+  document.getElementById('btnNext').disabled=true;
+
+  const opts=q.o[lang]||q.o.ar;
+  const letters=['أ','ب','ج','د'];
+  const lettersEn=['A','B','C','D'];
+  const container=document.getElementById('optionsContainer');
+  container.innerHTML='';
+
+  opts.forEach((opt,i)=>{
+    const div=document.createElement('div');
+    div.className='option';
+    div.innerHTML=`<span class="opt-letter">${lang==='ar'?letters[i]:lettersEn[i]}</span><span>${opt}</span>`;
+    div.onclick=()=>selectOption(i,q.a,div);
+    container.appendChild(div);
+  });
+
+  // Animate
+  document.getElementById('questionCard').style.animation='none';
+  requestAnimationFrame(()=>{document.getElementById('questionCard').style.animation='slideIn 0.4s ease';});
+}
+
+function selectOption(selected,correct,clickedEl){
+  document.querySelectorAll('.option').forEach(o=>o.classList.add('locked'));
+  document.querySelectorAll('.option').forEach((o,i)=>{
+    if(i===correct)o.classList.add('correct');
+    else if(i===selected&&selected!==correct)o.classList.add('wrong');
+  });
+  if(selected===correct)score++;
+  answered++;
+  document.getElementById('scoreTrack').textContent=`${score}/${answered} ✓`;
+  document.getElementById('btnNext').disabled=false;
+}
+
+function nextQuestion(){
+  currentQ++;
+  if(currentQ>=courseData.questions.length){clearInterval(timerInterval);showResult();}
+  else showQuestion();
+}
+
+function showResult(){
+  document.getElementById('examSection').style.display='none';
+  document.getElementById('resultSection').style.display='block';
+  const lang=document.documentElement.getAttribute('data-lang')||'ar';
+  const pass=score>=7;
+  const circle=document.getElementById('resultCircle');
+  circle.classList.add(pass?'pass':'fail');
+  document.getElementById('resultScore').textContent=score;
+  document.getElementById('resultTitle').textContent=pass?(lang==='ar'?'🎉 مبروك! اجتزت الاختبار':'🎉 Congratulations! You Passed'):(lang==='ar'?'😔 لم تجتز الاختبار':'😔 You Did Not Pass');
+  document.getElementById('resultMsg').textContent=pass
+    ?(lang==='ar'?`حصلت على ${score} من 15. يمكنك الآن تحميل شهادة الإتمام.`:`You scored ${score} out of 15. You can now download your certificate.`)
+    :(lang==='ar'?`حصلت على ${score} من 15. تحتاج 7 إجابات صحيحة على الأقل. راجع الدورة وأعد المحاولة.`:`You scored ${score} out of 15. You need at least 7 correct answers. Review the course and try again.`);
+
+  const btns=document.getElementById('resultBtns');
+  if(pass){
+    btns.innerHTML=`<button class="btn-cert" onclick="showCertificate()">${lang==='ar'?'🏆 عرض الشهادة':'🏆 View Certificate'}</button><a href="courses.html" class="btn-retry">${lang==='ar'?'العودة للدورات':'Back to Courses'}</a>`;
+  } else {
+    btns.innerHTML=`<button class="btn-retry" onclick="retryExam()">${lang==='ar'?'🔄 أعد المحاولة':'🔄 Try Again'}</button><a href="courses.html" class="btn-retry">${lang==='ar'?'العودة للدورات':'Back to Courses'}</a>`;
+  }
+}
+
+function retryExam(){
+  currentQ=0;score=0;answered=0;timeLeft=1200;
+  document.getElementById('timerDisplay').style.color='';
+  document.getElementById('resultSection').style.display='none';
+  document.getElementById('examSection').style.display='block';
+  showQuestion();
+  startTimer();
+}
+
+function showCertificate(){
+  document.getElementById('resultSection').style.display='none';
+  document.getElementById('certSection').style.display='block';
+  const lang=document.documentElement.getAttribute('data-lang')||'ar';
+  const user=JSON.parse(localStorage.getItem('itAcademyCurrentUser')||'null');
+  const name=user?user.name:(lang==='ar'?'الطالب':'Student');
+  document.getElementById('certName').textContent=name;
+  document.getElementById('certCourse').textContent=courseData[lang]||courseData.ar;
+  document.getElementById('certScore').textContent=`${score}/15`;
+  document.getElementById('certPercent').textContent=Math.round((score/15)*100)+'%';
+  const now=new Date();
+  document.getElementById('certDate').textContent=(lang==='ar'?'تاريخ الإصدار: ':'Issue Date: ')+now.toLocaleDateString(lang==='ar'?'ar-JO':'en-US',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('certId').textContent='ID: ITMGMT-'+Math.random().toString(36).substr(2,8).toUpperCase();
+}
+</script>
+</body>
+</html>

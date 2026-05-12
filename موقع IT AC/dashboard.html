@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+        <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+    <!-- ================= BASIC META ================= -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+    <meta name="description" content="لوحة التحكم - IT Management Business Academy">
+    <meta name="keywords" content="ملف شخصي, لوحة تحكم, إنجازات, شهادات">
+    <meta name="author" content="IT Management Business Academy">
+    <meta name="theme-color" content="#0284c7">
+
+    <title>لوحة التحكم | IT Management Business Academy</title>
+
+    <!-- ================= FAVICON ================= -->
+    <link rel="icon" type="image/png" href="/images/IT.png">
+    <link rel="apple-touch-icon" href="/images/IT.png">
+
+    <!-- ================= OPEN GRAPH ================= -->
+    <meta property="og:image" content="https://linkversa.sbs/images/IT.png">
+    <meta name="twitter:image" content="https://linkversa.sbs/images/IT.png">
+
+    <!-- ================= FONTS ================= -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- ================= FONT AWESOME ================= -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <!-- ================= CHART JS ================= -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- ================= AOS ================= -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, updateProfile, signOut, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, where, getDocs, orderBy, limit, Timestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyAq9SyITCz-fLHyCNLX4jy1nKO8sn3mfSo",
+            authDomain: "safe-vault-aeb34.firebaseapp.com",
+            projectId: "safe-vault-aeb34",
+            storageBucket: "safe-vault-aeb34.firebasestorage.app",
+            messagingSenderId: "923643379266",
+            appId: "1:923643379266:web:745defd283e1d8db7ab7db",
+            measurementId: "G-GTYEWDYD2J"
+        };
+        
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const storage = getStorage(app);
+        const googleProvider = new GoogleAuthProvider();
+        
+        window.auth = auth;
+        window.db = db;
+        window.storage = storage;
+        window.googleProvider = googleProvider;
+        window.onAuthStateChanged = onAuthStateChanged;
+        window.updateProfile = updateProfile;
+        window.signOut = signOut;
+        window.signInWithPopup = signInWithPopup;
+        window.doc = doc;
+        window.getDoc = getDoc;
+        window.setDoc = setDoc;
+        window.updateDoc = updateDoc;
+        window.collection = collection;
+        window.query = query;
+        window.where = where;
+        window.getDocs = getDocs;
+        window.orderBy = orderBy;
+        window.limit = limit;
+        window.Timestamp = Timestamp;
+        window.ref = ref;
+        window.uploadBytes = uploadBytes;
+        window.getDownloadURL = getDownloadURL;
+        
+        console.log("Firebase initialized for dashboard");
+    </script>
+    
+    <style>
+        /* ============================================ */
+        /* ROOT VARIABLES - Premium Dashboard Design */
+        /* ============================================ */
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --primary-light: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.4);
+            --secondary: #0f172a;
+            --secondary-light: #1e293b;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #fbbf24;
+            --info: #3b82f6;
+            --purple: #8b5cf6;
+            --pink: #ec4899;
+            
+            --glass-bg: rgba(30, 41, 59, 0.6);
+            --glass-bg-light: rgba(30, 41, 59, 0.4);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-border-light: rgba(255, 255, 255, 0.05);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 15px 40px rgba(0, 0, 0, 0.2);
+            --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+            --shadow-glow: 0 0 30px var(--primary-glow);
+            
+            --transition-fast: 0.2s ease;
+            --transition-normal: 0.3s ease;
+            --transition-slow: 0.5s ease;
+            
+            --border-radius-sm: 0.5rem;
+            --border-radius-md: 1rem;
+            --border-radius-lg: 1.5rem;
+            --border-radius-xl: 2rem;
+            --border-radius-2xl: 3rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body.light-mode {
+            --glass-bg: rgba(255, 255, 255, 0.6);
+            --text-primary: #0f172a;
+            --text-secondary: #334155;
+            --text-muted: #64748b;
+        }
+
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .mesh-gradient {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 50%, rgba(2, 132, 199, 0.15) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
+        }
+
+        .bg-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            animation: floatOrb 25s infinite alternate ease-in-out;
+        }
+
+        .bg-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            top: -200px;
+            right: -200px;
+            opacity: 0.3;
+        }
+
+        .bg-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--primary-light), transparent);
+            bottom: -150px;
+            left: -150px;
+            opacity: 0.2;
+        }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, -50px) scale(1.3); }
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            background: linear-gradient(135deg, var(--primary-light), transparent);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.1; }
+            90% { opacity: 0.1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(20px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--glass-border);
+            transition: all var(--transition-normal);
+        }
+
+        nav.scrolled {
+            padding: 0.7rem 5%;
+            background: rgba(15, 23, 42, 0.95);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: var(--border-radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .logo-icon i {
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.3rem;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 600;
+            padding: 0.6rem 1.2rem;
+            border-radius: var(--border-radius-2xl);
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary-light);
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1rem;
+            border-radius: var(--border-radius-2xl);
+            cursor: pointer;
+            color: var(--text-primary);
+            transition: all var(--transition-normal);
+        }
+
+        .icon-btn:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 1rem;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 7rem 2rem 3rem;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0f172a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader {
+            width: 60px;
+            height: 60px;
+            border: 3px solid var(--glass-border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Auth Required */
+        .auth-required {
+            text-align: center;
+            padding: 4rem;
+            background: var(--glass-bg);
+            border-radius: var(--border-radius-lg);
+            margin: 2rem auto;
+            max-width: 500px;
+        }
+
+        .auth-required i {
+            font-size: 4rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        /* Profile Hero */
+        .profile-hero {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-xl);
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .cover-banner {
+            height: 180px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark), var(--purple));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-banner::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(45deg, transparent, transparent 30px, rgba(255,255,255,0.05) 30px, rgba(255,255,255,0.05) 60px);
+        }
+
+        .profile-info {
+            display: flex;
+            align-items: flex-end;
+            gap: 2rem;
+            padding: 0 2rem 2rem;
+            margin-top: -50px;
+            flex-wrap: wrap;
+        }
+
+        .profile-avatar {
+            position: relative;
+        }
+
+        .avatar-frame {
+            width: 130px;
+            height: 130px;
+            background: var(--glass-bg);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-glow);
+            transition: all var(--transition-normal);
+            overflow: hidden;
+        }
+
+        .avatar-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .avatar-frame i {
+            font-size: 4rem;
+            color: var(--primary-light);
+        }
+
+        .edit-avatar-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background: var(--primary);
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+            transition: all var(--transition-fast);
+        }
+
+        .edit-avatar-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-details {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .verified-badge {
+            background: var(--success);
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--border-radius-xl);
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .profile-title {
+            color: var(--primary-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-email {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .profile-stat {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--glass-bg-light);
+            padding: 0.3rem 1rem;
+            border-radius: var(--border-radius-xl);
+        }
+
+        .profile-stat i {
+            color: var(--primary-light);
+        }
+
+        .edit-profile-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius-xl);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .edit-profile-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .xp-section {
+            padding: 1rem 2rem 2rem;
+        }
+
+        .xp-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .xp-bar {
+            height: 10px;
+            background: var(--glass-border);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .xp-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 5px;
+            position: relative;
+            transition: width 0.5s ease;
+        }
+
+        .xp-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .stat-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-light);
+        }
+
+        .stat-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section-title i {
+            color: var(--primary-light);
+        }
+
+        /* Courses Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .course-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: all var(--transition-normal);
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .course-image {
+            height: 140px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-image i {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .course-level {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            padding: 0.2rem 0.8rem;
+            border-radius: var(--border-radius-xl);
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        .level-beginner { background: var(--success); color: white; }
+        .level-intermediate { background: var(--warning); color: #000; }
+        .level-advanced { background: var(--danger); color: white; }
+
+        .course-content {
+            padding: 1.2rem;
+        }
+
+        .course-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .progress-section {
+            margin-bottom: 1rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--glass-border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+
+        .continue-btn {
+            width: 100%;
+            padding: 0.7rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            border-radius: var(--border-radius-xl);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Certificates Grid */
+        .certificates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .certificate-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all var(--transition-normal);
+            cursor: pointer;
+        }
+
+        .certificate-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .certificate-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), #d97706);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .certificate-icon i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .certificate-title {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .certificate-date {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .certificate-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .cert-action-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 0.8rem;
+            border-radius: var(--border-radius-xl);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .cert-action-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .achievement-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1rem;
+            text-align: center;
+            transition: all var(--transition-normal);
+        }
+
+        .achievement-card.earned {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .achievement-card.locked {
+            opacity: 0.5;
+        }
+
+        .achievement-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent), #d97706);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.8rem;
+        }
+
+        .achievement-icon i {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .achievement-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .achievement-desc {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Charts Section */
+        .charts-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .chart-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+        }
+
+        .chart-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        canvas {
+            max-height: 250px;
+        }
+
+        /* Timeline */
+        .timeline {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .timeline-item:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--glass-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timeline-icon i {
+            color: var(--primary-light);
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .timeline-time {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        /* Settings Panel */
+        .settings-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-lg);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .settings-panel.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .setting-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .setting-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .setting-group input,
+        .setting-group select {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius-md);
+            color: var(--text-primary);
+            font-family: inherit;
+        }
+
+        .setting-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .save-settings-btn {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: var(--border-radius-xl);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--secondary-light);
+            border-radius: var(--border-radius-lg);
+            max-width: 500px;
+            width: 90%;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .modal-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: var(--border-radius-xl);
+            cursor: pointer;
+        }
+
+        .modal-btn.confirm {
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .modal-btn.cancel {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            color: var(--text-primary);
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius-2xl);
+            color: white;
+            z-index: 3000;
+            animation: toastFade 0.3s ease;
+        }
+
+        .toast.success { background: var(--success); }
+        .toast.error { background: var(--danger); }
+        .toast.info { background: var(--info); }
+
+        @keyframes toastFade {
+            from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            to { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+            background: var(--glass-bg);
+            border-radius: var(--border-radius-lg);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        /* Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normal);
+            z-index: 999;
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Skeleton */
+        .skeleton {
+            background: linear-gradient(90deg, var(--glass-bg) 25%, var(--glass-border) 50%, var(--glass-bg) 75%);
+            background-size: 200% 100%;
+            animation: skeletonLoad 1.5s infinite;
+            border-radius: var(--border-radius-md);
+        }
+
+        @keyframes skeletonLoad {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: calc(100vh - 70px);
+                background: var(--secondary);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem;
+                transition: left var(--transition-normal);
+            }
+            .nav-links.active {
+                left: 0;
+            }
+            .profile-info {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .profile-stats {
+                justify-content: center;
+            }
+            .courses-grid,
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+            .charts-section {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="animated-bg">
+        <div class="mesh-gradient"></div>
+        <div class="bg-orb bg-orb-1"></div>
+        <div class="bg-orb bg-orb-2"></div>
+    </div>
+    <div class="particles-container" id="particlesContainer"></div>
+
+    <nav id="navbar">
+        <div class="logo">
+            <div class="logo-icon"><i class="fas fa-chalkboard-user"></i></div>
+            <div class="logo-text">IT MBA</div>
+        </div>
+        <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="index.html" class="active"><i class="fas fa-home"></i> الرئيسية</a></li>
+            <li><a href="dashboard.html" class="active"><i class="fas fa-user"></i> ملفي الشخصي</a></li>
+            <li><a href="courses.html"><i class="fas fa-graduation-cap"></i> الدورات</a></li>
+            <li><a href="about.html"><i class="fas fa-building"></i> من نحن</a></li>
+            <li><a href="support.html"><i class="fas fa-headset"></i> الدعم الفني</a></li>
+            <li><a href="contact.html"><i class="fas fa-envelope"></i> التواصل</a></li>
+            <li><a href="comments.html"><i class="fas fa-envelope"></i> التعليقات</a></li>
+
+        </ul>
+        <div class="nav-controls">
+            <button id="themeToggle" class="icon-btn"><i class="fas fa-moon"></i></button>
+            <div id="authStatus"></div>
+        </div>
+    </nav>
+
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="container" id="mainContent" style="display: none;">
+        <!-- Profile Hero Section will be populated dynamically -->
+        <div id="profileHero"></div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid" id="statsGrid"></div>
+
+        <!-- Courses Section -->
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-play-circle"></i> دوراتي الحالية</div>
+        </div>
+        <div class="courses-grid" id="coursesGrid"></div>
+
+        <!-- Certificates Section -->
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-certificate"></i> شهاداتي</div>
+        </div>
+        <div class="certificates-grid" id="certificatesGrid"></div>
+
+        <!-- Achievements Section -->
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-medal"></i> إنجازاتي</div>
+        </div>
+        <div class="achievements-grid" id="achievementsGrid"></div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-card">
+                <h3><i class="fas fa-chart-line"></i> ساعات التعلم الأسبوعية</h3>
+                <canvas id="weeklyChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3><i class="fas fa-chart-pie"></i> توزيع التخصصات</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="section-header">
+            <div class="section-title"><i class="fas fa-history"></i> آخر النشاطات</div>
+        </div>
+        <div class="timeline" id="timeline"></div>
+
+        <!-- Settings Panel -->
+        <div class="settings-panel" id="settingsPanel">
+            <div class="section-header">
+                <div class="section-title"><i class="fas fa-cog"></i> إعدادات الحساب</div>
+                <button class="icon-btn" id="closeSettingsBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="settings-grid">
+                <div class="setting-group">
+                    <label><i class="fas fa-user"></i> الاسم الكامل</label>
+                    <input type="text" id="fullNameInput">
+                </div>
+                <div class="setting-group">
+                    <label><i class="fas fa-briefcase"></i> التخصص / المهنة</label>
+                    <input type="text" id="titleInput">
+                </div>
+                <div class="setting-group">
+                    <label><i class="fas fa-language"></i> اللغة</label>
+                    <select id="languageSelect">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+                <div class="setting-group">
+                    <label><i class="fas fa-bell"></i> الإشعارات</label>
+                    <select id="notificationsSelect">
+                        <option value="all">جميع الإشعارات</option>
+                        <option value="important">المهمة فقط</option>
+                        <option value="none">بدون إشعارات</option>
+                    </select>
+                </div>
+            </div>
+            <button class="save-settings-btn" id="saveSettingsBtn"><i class="fas fa-save"></i> حفظ التغييرات</button>
+        </div>
+    </div>
+
+    <div class="back-to-top" id="backToTop"><i class="fas fa-arrow-up"></i></div>
+
+    <!-- Certificate Modal -->
+    <div class="modal" id="certificateModal">
+        <div class="modal-content">
+            <h3 id="modalCertTitle"></h3>
+            <div style="background: white; color: #000; padding: 1.5rem; border-radius: 1rem; margin: 1rem 0;">
+                <h4 style="color: #0284c7;">IT Management Business Academy</h4>
+                <p>تشهد بأن</p>
+                <h3 id="modalUserName"></h3>
+                <p>قد أتم بنجاح دورة</p>
+                <h4 id="modalCertName"></h4>
+                <p>التاريخ: <span id="modalCertDate"></span></p>
+                <div id="modalQRCode" style="margin: 1rem auto; width: 100px; height: 100px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; border-radius: 10px;">🎓</div>
+                <small style="color: red;">⚠️ هذه الشهادة غير معتمدة وهي لأغراض تعليمية فقط</small>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn confirm" id="downloadCertBtn"><i class="fas fa-download"></i> تحميل PDF</button>
+                <button class="modal-btn cancel" id="closeModalBtn">إغلاق</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // ============================================
+        // GLOBAL VARIABLES
+        // ============================================
+        let currentUser = null;
+        let userData = null;
+        let weeklyChart = null;
+        let categoryChart = null;
+        
+        // DOM Elements
+        const loadingScreen = document.getElementById('loadingScreen');
+        const mainContent = document.getElementById('mainContent');
+        const profileHero = document.getElementById('profileHero');
+        const statsGrid = document.getElementById('statsGrid');
+        const coursesGrid = document.getElementById('coursesGrid');
+        const certificatesGrid = document.getElementById('certificatesGrid');
+        const achievementsGrid = document.getElementById('achievementsGrid');
+        const timeline = document.getElementById('timeline');
+        const settingsPanel = document.getElementById('settingsPanel');
+        
+        // ============================================
+        // HELPER FUNCTIONS
+        // ============================================
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `<i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'}"></i> ${message}`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+        
+        function formatDate(timestamp) {
+            if (!timestamp) return 'غير محدد';
+            const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+            return date.toLocaleDateString('ar-EG', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        }
+        
+        function formatTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'الآن';
+            const minutes = Math.floor(seconds / 60);
+            if (minutes < 60) return `منذ ${minutes} دقيقة`;
+            const hours = Math.floor(minutes / 60);
+            if (hours < 24) return `منذ ${hours} ساعة`;
+            const days = Math.floor(hours / 24);
+            if (days < 30) return `منذ ${days} يوم`;
+            const months = Math.floor(days / 30);
+            if (months < 12) return `منذ ${months} شهر`;
+            return `منذ ${Math.floor(months / 12)} سنة`;
+        }
+        
+        function animateNumber(elementId, target) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.innerText = target;
+                    clearInterval(timer);
+                } else {
+                    element.innerText = Math.floor(current);
+                }
+            }, 20);
+        }
+        
+        // ============================================
+        // CREATE USER DOCUMENT IF NOT EXISTS
+        // ============================================
+        async function createUserDocument(user) {
+            const userRef = window.doc(window.db, 'users', user.uid);
+            const userSnap = await window.getDoc(userRef);
+            
+            if (!userSnap.exists()) {
+                const userData = {
+                    uid: user.uid,
+                    name: user.displayName || user.email.split('@')[0],
+                    email: user.email,
+                    photoURL: user.photoURL || null,
+                    title: 'طالب في الأكاديمية',
+                    xp: 0,
+                    level: 1,
+                    streak: 0,
+                    createdAt: window.Timestamp.now(),
+                    lastSeen: window.Timestamp.now(),
+                    settings: {
+                        language: 'ar',
+                        notifications: 'all'
+                    },
+                    enrolledCourses: [],
+                    completedCourses: [],
+                    certificates: [],
+                    achievements: [],
+                    weeklyStudyHours: [0, 0, 0, 0, 0, 0, 0]
+                };
+                await window.setDoc(userRef, userData);
+                return userData;
+            }
+            
+            // Update last seen
+            await window.updateDoc(userRef, { lastSeen: window.Timestamp.now() });
+            return userSnap.data();
+        }
+        
+        // ============================================
+        // RENDER PROFILE HERO
+        // ============================================
+        function renderProfileHero() {
+            if (!userData) return;
+            
+            const level = Math.floor(userData.xp / 1000) + 1;
+            const xpNeeded = level * 1000;
+            const xpProgress = (userData.xp % 1000) / 10;
+            
+            profileHero.innerHTML = `
+                <div class="profile-hero">
+                    <div class="cover-banner"></div>
+                    <div class="profile-info">
+                        <div class="profile-avatar">
+                            <div class="avatar-frame" id="avatarFrame">
+                                ${userData.photoURL ? `<img src="${userData.photoURL}" alt="Avatar">` : '<i class="fas fa-user-circle"></i>'}
+                            </div>
+                            <button class="edit-avatar-btn" id="editAvatarBtn"><i class="fas fa-camera"></i></button>
+                            <input type="file" id="avatarInput" style="display: none;" accept="image/*">
+                        </div>
+                        <div class="profile-details">
+                            <div class="profile-name">
+                                ${userData.name}
+                                <span class="verified-badge"><i class="fas fa-check-circle"></i> موثق</span>
+                            </div>
+                            <div class="profile-title">${userData.title || 'طالب في الأكاديمية'}</div>
+                            <div class="profile-email"><i class="fas fa-envelope"></i> ${userData.email}</div>
+                            <div class="profile-stats">
+                                <div class="profile-stat"><i class="fas fa-calendar-alt"></i> عضو منذ ${formatDate(userData.createdAt)}</div>
+                                <div class="profile-stat"><i class="fas fa-fire"></i> ${userData.streak || 0} يوم متتالي</div>
+                                <div class="profile-stat"><i class="fas fa-star"></i> مستوى ${level}</div>
+                            </div>
+                        </div>
+                        <button class="edit-profile-btn" id="editProfileBtn"><i class="fas fa-edit"></i> تعديل الملف الشخصي</button>
+                    </div>
+                    <div class="xp-section">
+                        <div class="xp-header">
+                            <span><i class="fas fa-chart-line"></i> مستوى ${level} • ${userData.xp} / ${xpNeeded} XP</span>
+                            <span>${xpProgress}% إلى المستوى ${level + 1}</span>
+                        </div>
+                        <div class="xp-bar">
+                            <div class="xp-fill" style="width: ${xpProgress}%"></div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Avatar upload
+            const avatarInput = document.getElementById('avatarInput');
+            const editAvatarBtn = document.getElementById('editAvatarBtn');
+            
+            editAvatarBtn?.addEventListener('click', () => avatarInput.click());
+            avatarInput?.addEventListener('change', async (e) => {
+                const file = e.target.files[0];
+                if (file && currentUser) {
+                    const storageRef = window.ref(window.storage, `avatars/${currentUser.uid}`);
+                    await window.uploadBytes(storageRef, file);
+                    const photoURL = await window.getDownloadURL(storageRef);
+                    await window.updateProfile(currentUser, { photoURL });
+                    await window.updateDoc(window.doc(window.db, 'users', currentUser.uid), { photoURL });
+                    showToast('تم تحديث الصورة الشخصية', 'success');
+                    location.reload();
+                }
+            });
+            
+            // Edit profile button
+            const editProfileBtn = document.getElementById('editProfileBtn');
+            editProfileBtn?.addEventListener('click', () => settingsPanel.classList.toggle('show'));
+        }
+        
+        // ============================================
+        // RENDER STATS
+        // ============================================
+        function renderStats() {
+            const completedCourses = userData.completedCourses?.length || 0;
+            const certificates = userData.certificates?.length || 0;
+            const totalHours = userData.totalStudyHours || 0;
+            
+            statsGrid.innerHTML = `
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+                    <div class="stat-number" id="coursesCount">0</div>
+                    <div class="stat-label">الدورات المسجلة</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-icon"><i class="fas fa-certificate"></i></div>
+                    <div class="stat-number" id="certificatesCount">0</div>
+                    <div class="stat-label">الشهادات المكتسبة</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                    <div class="stat-number" id="hoursCount">0</div>
+                    <div class="stat-label">ساعات التعلم</div>
+                </div>
+                <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-number" id="completedCount">0</div>
+                    <div class="stat-label">دورات مكتملة</div>
+                </div>
+            `;
+            
+            animateNumber('coursesCount', userData.enrolledCourses?.length || 0);
+            animateNumber('certificatesCount', certificates);
+            animateNumber('hoursCount', totalHours);
+            animateNumber('completedCount', completedCourses);
+        }
+        
+        // ============================================
+        // RENDER COURSES
+        // ============================================
+        function renderCourses() {
+            const enrolledCourses = userData.enrolledCourses || [];
+            
+            if (enrolledCourses.length === 0) {
+                coursesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-book-open"></i>
+                        <p>لم تسجل في أي دورة بعد</p>
+                        <p style="font-size: 0.85rem;">تصفح الدورات وابدأ التعلم الآن!</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Demo courses data (would come from Firestore in real app)
+            const demoCourses = [
+                { id: 1, name: "البرمجة وتطوير الويب", level: "beginner", progress: 75, lastWatched: "أمس", rating: 4.8 },
+                { id: 2, name: "الأمن السيبراني", level: "intermediate", progress: 45, lastWatched: "منذ يومين", rating: 4.9 },
+                { id: 3, name: "الذكاء الاصطناعي", level: "advanced", progress: 20, lastWatched: "الأسبوع الماضي", rating: 4.7 }
+            ];
+            
+            coursesGrid.innerHTML = demoCourses.map(course => `
+                <div class="course-card">
+                    <div class="course-image">
+                        <i class="fas fa-code"></i>
+                        <span class="course-level level-${course.level}">${course.level === 'beginner' ? 'مبتدئ' : course.level === 'intermediate' ? 'متوسط' : 'متقدم'}</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">${course.name}</h3>
+                        <div class="course-meta">
+                            <span><i class="fas fa-clock"></i> آخر مشاهدة: ${course.lastWatched}</span>
+                            <span><i class="fas fa-star"></i> ${course.rating}</span>
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-label"><span>نسبة التقدم</span><span>${course.progress}%</span></div>
+                            <div class="progress-bar"><div class="progress-fill" style="width: ${course.progress}%"></div></div>
+                        </div>
+                        <button class="continue-btn" onclick="showToast('جاري استكمال الدورة...', 'info')"><i class="fas fa-play"></i> متابعة التعلم</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ============================================
+        // RENDER CERTIFICATES
+        // ============================================
+        function renderCertificates() {
+            const certificates = userData.certificates || [];
+            
+            if (certificates.length === 0) {
+                certificatesGrid.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-certificate"></i>
+                        <p>لا توجد شهادات بعد</p>
+                        <p style="font-size: 0.85rem;">أكمل الدورات واجتاز الاختبارات للحصول على الشهادات</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            certificatesGrid.innerHTML = certificates.map(cert => `
+                <div class="certificate-card" onclick="showCertificateModal('${cert.name}', '${cert.date}')">
+                    <div class="certificate-icon"><i class="fas fa-award"></i></div>
+                    <h3 class="certificate-title">${cert.name}</h3>
+                    <div class="certificate-date"><i class="fas fa-calendar"></i> ${cert.date}</div>
+                    <div class="certificate-actions">
+                        <button class="cert-action-btn" onclick="event.stopPropagation(); downloadCertificate('${cert.name}')"><i class="fas fa-download"></i></button>
+                        <button class="cert-action-btn" onclick="event.stopPropagation(); shareCertificate('${cert.name}')"><i class="fas fa-share-alt"></i></button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ============================================
+        // RENDER ACHIEVEMENTS
+        // ============================================
+        function renderAchievements() {
+            const achievements = userData.achievements || [];
+            const allAchievements = [
+                { id: 1, name: "البداية", desc: "أكمل أول دورة", icon: "fas fa-rocket" },
+                { id: 2, name: "المثابرة", desc: "7 أيام متتالية", icon: "fas fa-fire" },
+                { id: 3, name: "الخبير", desc: "أكمل 10 دورات", icon: "fas fa-crown" },
+                { id: 4, name: "المساعد", desc: "قدم 5 تعليقات مفيدة", icon: "fas fa-handshake" },
+                { id: 5, name: "النجم", desc: "احصل على 1000 نقطة XP", icon: "fas fa-star" }
+            ];
+            
+            const earnedIds = achievements.map(a => a.id);
+            
+            achievementsGrid.innerHTML = allAchievements.map(ach => `
+                <div class="achievement-card ${earnedIds.includes(ach.id) ? 'earned' : 'locked'}">
+                    <div class="achievement-icon"><i class="${ach.icon}"></i></div>
+                    <div class="achievement-name">${ach.name}</div>
+                    <div class="achievement-desc">${ach.desc}</div>
+                </div>
+            `).join('');
+        }
+        
+        // ============================================
+        // RENDER TIMELINE
+        // ============================================
+        function renderTimeline() {
+            const activities = [
+                { icon: "fas fa-play-circle", title: "بدأت دورة البرمجة", time: new Date() },
+                { icon: "fas fa-check-circle", title: "أنهيت درس JavaScript", time: new Date(Date.now() - 86400000) },
+                { icon: "fas fa-certificate", title: "حصلت على شهادة الأمن السيبراني", time: new Date(Date.now() - 259200000) },
+                { icon: "fas fa-sign-in-alt", title: "تسجيل الدخول", time: new Date(Date.now() - 3600000) }
+            ];
+            
+            timeline.innerHTML = activities.map(act => `
+                <div class="timeline-item">
+                    <div class="timeline-icon"><i class="${act.icon}"></i></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">${act.title}</div>
+                        <div class="timeline-time">${formatTimeAgo(act.time)}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        // ============================================
+        // INIT CHARTS
+        // ============================================
+        function initCharts() {
+            const weeklyCtx = document.getElementById('weeklyChart')?.getContext('2d');
+            if (weeklyCtx) {
+                if (weeklyChart) weeklyChart.destroy();
+                weeklyChart = new Chart(weeklyCtx, {
+                    type: 'line',
+                    data: {
+                        labels: ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                        datasets: [{
+                            label: 'ساعات التعلم',
+                            data: userData.weeklyStudyHours || [2, 3, 1, 4, 5, 2, 3],
+                            borderColor: '#38bdf8',
+                            backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: true }
+                });
+            }
+            
+            const categoryCtx = document.getElementById('categoryChart')?.getContext('2d');
+            if (categoryCtx) {
+                if (categoryChart) categoryChart.destroy();
+                categoryChart = new Chart(categoryCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['تكنولوجيا المعلومات', 'إدارة الأعمال', 'البرمجة', 'الأمن السيبراني'],
+                        datasets: [{
+                            data: [40, 25, 20, 15],
+                            backgroundColor: ['#0284c7', '#38bdf8', '#8b5cf6', '#10b981']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: true }
+                });
+            }
+        }
+        
+        // ============================================
+        // SETTINGS
+        // ============================================
+        function initSettings() {
+            document.getElementById('fullNameInput').value = userData.name || '';
+            document.getElementById('titleInput').value = userData.title || '';
+            document.getElementById('languageSelect').value = userData.settings?.language || 'ar';
+            document.getElementById('notificationsSelect').value = userData.settings?.notifications || 'all';
+            
+            const saveBtn = document.getElementById('saveSettingsBtn');
+            const closeBtn = document.getElementById('closeSettingsBtn');
+            
+            saveBtn?.addEventListener('click', async () => {
+                const newName = document.getElementById('fullNameInput').value;
+                const newTitle = document.getElementById('titleInput').value;
+                const newLanguage = document.getElementById('languageSelect').value;
+                const newNotifications = document.getElementById('notificationsSelect').value;
+                
+                if (currentUser && newName !== userData.name) {
+                    await window.updateProfile(currentUser, { displayName: newName });
+                }
+                
+                await window.updateDoc(window.doc(window.db, 'users', currentUser.uid), {
+                    name: newName,
+                    title: newTitle,
+                    'settings.language': newLanguage,
+                    'settings.notifications': newNotifications
+                });
+                
+                showToast('تم حفظ التغييرات بنجاح!', 'success');
+                settingsPanel.classList.remove('show');
+                location.reload();
+            });
+            
+            closeBtn?.addEventListener('click', () => settingsPanel.classList.remove('show'));
+        }
+        
+        // ============================================
+        // CERTIFICATE MODAL
+        // ============================================
+        window.showCertificateModal = function(name, date) {
+            document.getElementById('modalCertName').innerText = name;
+            document.getElementById('modalCertDate').innerText = date;
+            document.getElementById('modalUserName').innerText = userData.name;
+            document.getElementById('modalCertTitle').innerText = name;
+            document.getElementById('certificateModal').classList.add('show');
+        };
+        
+        window.downloadCertificate = function(name) {
+            showToast(`جاري تحميل شهادة ${name}...`, 'info');
+        };
+        
+        window.shareCertificate = function(name) {
+            navigator.clipboard.writeText(`شهادة ${name} من IT Management Business Academy`);
+            showToast('تم نسخ رابط الشهادة', 'success');
+        };
+        
+        document.getElementById('closeModalBtn')?.addEventListener('click', () => {
+            document.getElementById('certificateModal').classList.remove('show');
+        });
+        
+        // ============================================
+        // AUTH STATE HANDLER
+        // ============================================
+        window.onAuthStateChanged(window.auth, async (user) => {
+            if (user) {
+                currentUser = user;
+                userData = await createUserDocument(user);
+                
+                // Update UI
+                renderProfileHero();
+                renderStats();
+                renderCourses();
+                renderCertificates();
+                renderAchievements();
+                renderTimeline();
+                initCharts();
+                initSettings();
+                
+                // Update auth status in navbar
+                const authStatus = document.getElementById('authStatus');
+                authStatus.innerHTML = `
+                    <div style="display: flex; gap: 0.5rem; align-items: center;">
+                        <span style="background: #0284c7; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; font-size: 0.9rem;">
+                            <i class="fas fa-user-circle"></i> ${user.displayName || user.email.split('@')[0]}
+                        </span>
+                        <button id="logoutBtn" style="background: #ef4444; border: none; padding: 0.3rem 0.8rem; border-radius: 2rem; color: white; cursor: pointer;">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                `;
+                
+                document.getElementById('logoutBtn')?.addEventListener('click', async () => {
+                    await window.signOut(window.auth);
+                    window.location.href = 'index.html';
+                });
+                
+                loadingScreen.classList.add('hide');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                }, 500);
+                
+            } else {
+                // User not logged in
+                loadingScreen.classList.add('hide');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    mainContent.innerHTML = `
+                        <div class="auth-required">
+                            <i class="fas fa-lock"></i>
+                            <h2>الرجاء تسجيل الدخول</h2>
+                            <p>يجب تسجيل الدخول لعرض الملف الشخصي</p>
+                            <a href="auth.html" class="edit-profile-btn" style="display: inline-block; margin-top: 1rem; text-decoration: none;">
+                                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                            </a>
+                        </div>
+                    `;
+                }, 500);
+            }
+        });
+        
+        // ============================================
+        // PARTICLES
+        // ============================================
+        function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            if (!container) return;
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = Math.random() * 4 + 1 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = Math.random() * 20 + 10 + 's';
+                particle.style.animationDelay = Math.random() * 10 + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+        
+        // ============================================
+        // NAVBAR SCROLL & MOBILE MENU
+        // ============================================
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        });
+        
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle?.addEventListener('click', () => navLinks.classList.toggle('active'));
+        
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        
+        // Theme toggle
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-mode');
+                document.getElementById('themeToggle').innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        }
+        document.getElementById('themeToggle')?.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            const isDark = !document.body.classList.contains('light-mode');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('themeToggle').innerHTML = isDark ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
+        });
+        initTheme();
+        
+        // AOS
+        AOS.init({ duration: 800, once: true, offset: 100 });
+        
+        // Make functions global for onclick
+        window.showToast = showToast;
+    </script>
+</body>
+</html>
